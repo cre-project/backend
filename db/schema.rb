@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_123700) do
+ActiveRecord::Schema.define(version: 2018_12_04_131221) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
     t.string "street_name"
@@ -18,6 +21,14 @@ ActiveRecord::Schema.define(version: 2018_12_04_123700) do
     t.string "city"
     t.string "state"
     t.integer "zip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "website_url"
+    t.string "logo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
