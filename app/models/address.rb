@@ -1,5 +1,5 @@
 class Address < ApplicationRecord
-  validates_presence_of :street_name
-  validates_presence_of :city
-  validates_presence_of :zip
+  validates :street_name, presence: true
+  validates :city, presence: true
+  validates :zip, presence: true
 end
