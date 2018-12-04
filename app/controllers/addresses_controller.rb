@@ -1,3 +1,5 @@
+# To be deleted, as address will be edited through other objects (e.g. property)
+
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :update, :destroy]
 

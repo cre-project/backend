@@ -1,3 +1,5 @@
+# To be deleted, as company will be edited through user
+
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :update, :destroy]
 
