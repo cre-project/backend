@@ -10,6 +10,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # This test needs fixing
   test "should create property" do
     assert_difference('Property.count') do
       post properties_url, params: { property: { apn: @property.apn, lot_size: @property.lot_size, name: @property.name, number_of_stories: @property.number_of_stories, price: @property.price, total_square_feet: @property.total_square_feet, year_built: @property.year_built } }, as: :json
@@ -23,6 +24,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # This test needs fixing
   test "should update property" do
     patch property_url(@property), params: { property: { apn: @property.apn, lot_size: @property.lot_size, name: @property.name, number_of_stories: @property.number_of_stories, price: @property.price, total_square_feet: @property.total_square_feet, year_built: @property.year_built } }, as: :json
     assert_response 200
