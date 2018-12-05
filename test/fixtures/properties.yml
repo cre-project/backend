@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  year_built: 1
+  number_of_stories: 1
+  lot_size: 1.5
+  apn: MyString
+  price: 1.5
+  total_square_feet: 1.5
+
+two:
+  name: MyString
+  year_built: 1
+  number_of_stories: 1
+  lot_size: 1.5
+  apn: MyString
+  price: 1.5
+  total_square_feet: 1.5
