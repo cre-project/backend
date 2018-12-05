@@ -10,6 +10,7 @@ class PropertyUnitsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # This test needs fixing
   test "should create property_unit" do
     assert_difference('PropertyUnit.count') do
       post property_units_url, params: { property_unit: { bathrooms: @property_unit.bathrooms, bedrooms: @property_unit.bedrooms, current_rent: @property_unit.current_rent, potential_rent: @property_unit.potential_rent } }, as: :json
