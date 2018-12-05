@@ -10,6 +10,6 @@ class PropertyUnit < ApplicationRecord
 
   # number range
   validates :bedrooms, inclusion: { in: 0..4 }
-  validates :bathrooms, inclusion: { in: %w(1 1.5 2 2.5 3),
+  validates :bathrooms, inclusion: { in: [1, 1.5, 2, 2.5, 3],
     message: "%{value} is not a valid number for bathrooms" }
 end

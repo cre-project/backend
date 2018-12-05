@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  year_built: 1
+  year_built: 1999
   number_of_stories: 1
   lot_size: 1.5
   apn: MyString
@@ -11,7 +11,7 @@ one:
 
 two:
   name: MyString
-  year_built: 1
+  year_built: 2018
   number_of_stories: 1
   lot_size: 1.5
   apn: MyString
