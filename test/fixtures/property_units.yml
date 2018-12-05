@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bedrooms: 1
+  bathrooms: 1
+  current_rent: 1.5
+  potential_rent: 1.5
+
+two:
+  bedrooms: 1
+  bathrooms: 1
+  current_rent: 1.5
+  potential_rent: 1.5

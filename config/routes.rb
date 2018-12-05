@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :property_units
   resources :properties
   resources :companies
   resources :addresses

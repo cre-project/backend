@@ -1,0 +1,2 @@
+class PropertyUnit < ApplicationRecord
+end
