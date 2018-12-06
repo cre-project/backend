@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  year_built: 1
+  rent: 1
+  bedrooms: 1
+  bathrooms: 1.5
+  sales_price: 1.5
+  num_units: 1
+  price_per_unit: 1.5
+  price_per_sf: 1.5
+  cap_rate: 1.5
+  grm: 1.5
+  close_of_escrow: 2018-12-06
+  image_url: MyString
+
+two:
+  name: MyString
+  year_built: 1
+  rent: 1
+  bedrooms: 1
+  bathrooms: 1.5
+  sales_price: 1.5
+  num_units: 1
+  price_per_unit: 1.5
+  price_per_sf: 1.5
+  cap_rate: 1.5
+  grm: 1.5
+  close_of_escrow: 2018-12-06
+  image_url: MyString

@@ -1,0 +1,2 @@
+class SoldProperty < ApplicationRecord
+end
