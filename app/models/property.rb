@@ -1,4 +1,7 @@
 class Property < ApplicationRecord
+  # associations
+  belongs_to :package
+
   # mandatory fields
   validates :price, presence: true
   validates :apn, presence: true

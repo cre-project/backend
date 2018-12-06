@@ -1,4 +1,7 @@
 class SoldProperty < ApplicationRecord
+  # associations
+  belongs_to :package
+
   # positive fields
   validates_numericality_of :year_built, :greater_than => 0.0
   validates_numericality_of :rent, :greater_than => 0.0
