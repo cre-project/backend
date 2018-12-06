@@ -1,0 +1,2 @@
+class RentedUnit < ApplicationRecord
+end
