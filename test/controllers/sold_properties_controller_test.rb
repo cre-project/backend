@@ -12,7 +12,7 @@ class SoldPropertiesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create sold_property" do
     assert_difference('SoldProperty.count') do
-      post sold_properties_url, params: { sold_property: { bathrooms: @sold_property.bathrooms, bedrooms: @sold_property.bedrooms, cap_rate: @sold_property.cap_rate, close_of_escrow: @sold_property.close_of_escrow, grm: @sold_property.grm, image_url: @sold_property.image_url, name: @sold_property.name, num_units: @sold_property.num_units, price_per_sf: @sold_property.price_per_sf, price_per_unit: @sold_property.price_per_unit, rent: @sold_property.rent, sales_price: @sold_property.sales_price, year_built: @sold_property.year_built } }, as: :json
+      post sold_properties_url, params: { sold_property: { bathrooms: @sold_property.bathrooms, bedrooms: @sold_property.bedrooms, cap_rate: @sold_property.cap_rate, close_of_escrow: @sold_property.close_of_escrow, grm: @sold_property.grm, image_url: @sold_property.image_url, name: @sold_property.name, num_units: @sold_property.num_units, price_per_sf: @sold_property.price_per_sf, price_per_unit: @sold_property.price_per_unit, rent: @sold_property.rent, sales_price: @sold_property.sales_price, year_built: @sold_property.year_built, package_id: @sold_property.package_id } }, as: :json
     end
 
     assert_response 201
