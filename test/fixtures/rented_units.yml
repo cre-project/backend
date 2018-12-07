@@ -14,6 +14,7 @@ one:
   grm: 1.5
   close_of_escrow: 2018-12-05
   image_url: MyString
+  package: one
 
 two:
   name: MyString
@@ -29,3 +30,4 @@ two:
   grm: 1.5
   close_of_escrow: 2018-12-05
   image_url: MyString
+  package: two
