@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  license_number: MyString
-  phone_number: 1
-  title: MyString
-  description: MyString
+mickey:
+  first_name: Mickey
+  last_name: Mouse
+  email: mickey.mouse@gmail.com
+  license_number: 1234
+  phone_number: 3473016929
+  title: Dr.
+  description: He is a funny and cute mouse
   subscription_expiration: 2018-12-06
 
-two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  license_number: MyString
-  phone_number: 1
-  title: MyString
-  description: MyString
+donald:
+  first_name: Donald
+  last_name: Duck
+  email: donald.duck@gmail.com
+  license_number: 5678
+  phone_number: 3473016929
+  title: Prof.
+  description: He is a greedy and rich duck
   subscription_expiration: 2018-12-06

@@ -2,12 +2,12 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
+    @user = users(:mickey)
   end
 
   test "should create user" do
     assert_difference('User.count') do
-      post users_url, params: { user: { description: @user.description, email: @user.email, first_name: @user.first_name, last_name: @user.last_name, license_number: @user.license_number, phone_number: @user.phone_number, subscription_expiration: @user.subscription_expiration, title: @user.title } }, as: :json
+      post users_url, params: { user: { description: @user.description, email: 'goofy.dog@gmail.com', first_name: @user.first_name, last_name: @user.last_name, license_number: @user.license_number, phone_number: @user.phone_number, subscription_expiration: @user.subscription_expiration, title: @user.title } }, as: :json
     end
 
     assert_response 201
