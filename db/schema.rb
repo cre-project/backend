@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_111846) do
+ActiveRecord::Schema.define(version: 2018_12_07_113003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_111846) do
     t.float "total_square_feet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "package_id"
   end
 
   create_table "property_units", force: :cascade do |t|

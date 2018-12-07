@@ -8,6 +8,7 @@ one:
   apn: MyString
   price: 1.5
   total_square_feet: 1.5
+  package: one
 
 two:
   name: MyString
@@ -17,3 +18,4 @@ two:
   apn: MyString
   price: 1.5
   total_square_feet: 1.5
+  package: two
