@@ -12,7 +12,7 @@ class RentedUnitsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create rented_unit" do
     assert_difference('RentedUnit.count') do
-      post rented_units_url, params: { rented_unit: { bathrooms: @rented_unit.bathrooms, bedrooms: @rented_unit.bedrooms, cap_rate: @rented_unit.cap_rate, close_of_escrow: @rented_unit.close_of_escrow, grm: @rented_unit.grm, image_url: @rented_unit.image_url, name: @rented_unit.name, num_units: @rented_unit.num_units, price_per_sf: @rented_unit.price_per_sf, price_per_unit: @rented_unit.price_per_unit, rent: @rented_unit.rent, sales_price: @rented_unit.sales_price, year_built: @rented_unit.year_built, package_id: @rented_unit.package_id } }, as: :json
+      post rented_units_url, params: { rented_unit: { bathrooms: @rented_unit.bathrooms, bedrooms: @rented_unit.bedrooms, cap_rate: @rented_unit.cap_rate, close_of_escrow: @rented_unit.close_of_escrow, grm: @rented_unit.grm, image_url: @rented_unit.image_url, name: @rented_unit.name, num_units: @rented_unit.num_units, price_per_sf: @rented_unit.price_per_sf, price_per_unit: @rented_unit.price_per_unit, rent: @rented_unit.rent, sales_price: @rented_unit.sales_price, year_built: @rented_unit.year_built } }, as: :json
     end
 
     assert_response 201
