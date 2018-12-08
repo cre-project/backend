@@ -5,9 +5,11 @@ one:
   property_id: 1
   rented_unit_id: 1
   sold_property_id: 1
+  user: mickey
 
 two:
   template: MyString
   property_id: 1
   rented_unit_id: 1
   sold_property_id: 1
+  user: donald

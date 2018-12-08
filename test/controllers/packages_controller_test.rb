@@ -12,7 +12,7 @@ class PackagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create package" do
     assert_difference('Package.count') do
-      post packages_url, params: { package: { property_id: @package.property_id, rented_unit_id: @package.rented_unit_id, sold_property_id: @package.sold_property_id, template: @package.template } }, as: :json
+      post packages_url, params: { package: { property_id: @package.property_id, rented_unit_id: @package.rented_unit_id, sold_property_id: @package.sold_property_id, template: @package.template, user_id: @package.user_id } }, as: :json
     end
 
     assert_response 201
