@@ -32,6 +32,6 @@ class PropertyUnitsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def property_unit_params
-      params.require(:property_unit).permit(:bedrooms, :bathrooms, :current_rent, :potential_rent)
+      params.require(:property_unit).permit(:bedrooms, :bathrooms, :current_rent, :potential_rent, :property_id)
     end
 end

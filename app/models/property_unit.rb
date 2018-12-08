@@ -1,4 +1,7 @@
 class PropertyUnit < ApplicationRecord
+  # associations
+  belongs_to :property
+
   # mandatory fields
   validates :bedrooms, presence: true
   validates :bathrooms, presence: true

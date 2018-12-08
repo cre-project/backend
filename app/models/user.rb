@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # associations
   has_many :packages
+  has_many :properties
 
   # mandatory fields
   validates :email, presence: true

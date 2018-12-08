@@ -5,9 +5,11 @@ one:
   bathrooms: 1
   current_rent: 1.5
   potential_rent: 1.5
+  property: one
 
 two:
   bedrooms: 1
   bathrooms: 1
   current_rent: 1.5
   potential_rent: 1.5
+  property: two
