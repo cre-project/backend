@@ -2,6 +2,7 @@ class SoldProperty < ApplicationRecord
   # associations
   belongs_to :user
   has_one :address
+  belongs_to :package, optional: true
 
   # positive fields
   validates_numericality_of :year_built, :greater_than => 0.0
