@@ -46,6 +46,6 @@ class SoldPropertiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def sold_property_params
-      params.require(:sold_property).permit(:name, :year_built, :rent, :bedrooms, :bathrooms, :sales_price, :num_units, :price_per_unit, :price_per_sf, :cap_rate, :grm, :close_of_escrow, :image_url, :package_id)
+      params.require(:sold_property).permit(:year_built, :sales_price, :num_units, :square_feet, :cap_rate, :grm, :close_of_escrow, :image_url)
     end
 end
