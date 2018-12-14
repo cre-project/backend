@@ -1,6 +1,6 @@
 class SoldProperty < ApplicationRecord
   # associations
-
+  belongs_to :user
 
   # positive fields
   validates_numericality_of :year_built, :greater_than => 0.0
