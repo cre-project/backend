@@ -1,5 +1,6 @@
 class RentedUnit < ApplicationRecord
   # associations
+  belongs_to :user
 
   # mandatory fields
   validates :bedrooms, presence: true

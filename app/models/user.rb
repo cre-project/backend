@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :packages
   has_many :properties
   has_many :sold_properties
+  has_many :rented_units
 
   # mandatory fields
   validates :email, presence: true
