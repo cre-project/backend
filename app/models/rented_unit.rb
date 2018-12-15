@@ -1,13 +1,13 @@
 class RentedUnit < ApplicationRecord
+  # associations
+
+  # mandatory fields
+  validates :bedrooms, presence: true
+  validates :current_rent, presence: true
+
   # positive fields
   validates_numericality_of :year_built, :greater_than => 0.0
-  validates_numericality_of :rent, :greater_than => 0.0
-  validates_numericality_of :sales_price, :greater_than => 0.0
-  validates_numericality_of :num_units, :greater_than => 0.0
-  validates_numericality_of :price_per_unit, :greater_than => 0.0
-  validates_numericality_of :price_per_sf, :greater_than => 0.0
-  validates_numericality_of :cap_rate, :greater_than => 0.0
-  validates_numericality_of :grm, :greater_than => 0.0
+  validates_numericality_of :current_rent, :greater_than => 0.0
 
   # number range
   validates :bedrooms, inclusion: { in: 0..4 }
