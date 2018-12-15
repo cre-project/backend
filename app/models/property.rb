@@ -1,8 +1,9 @@
 class Property < ApplicationRecord
   # associations
   belongs_to :user
-  belongs_to :package
+  belongs_to :package, optional: true
   has_many :property_units
+  has_one :address
 
   # mandatory fields
   validates :price, presence: true
