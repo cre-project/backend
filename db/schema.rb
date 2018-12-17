@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_160409) do
+ActiveRecord::Schema.define(version: 2018_12_17_161214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_12_17_160409) do
     t.boolean "is_income", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "operating_statement_id"
   end
 
   create_table "operating_statements", force: :cascade do |t|
