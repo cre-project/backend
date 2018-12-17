@@ -49,7 +49,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def address_params
-        params.require(:address).permit(:street_name, :street_number, :city, :state, :zip)
+        params.require(:address).permit(:street, :city, :state, :zip)
       end
   end
 end
