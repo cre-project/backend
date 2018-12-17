@@ -1,6 +1,7 @@
 class RentedUnit < ApplicationRecord
   # associations
   belongs_to :user
+  belongs_to :package, optional: true
   has_one :address
 
   # mandatory fields

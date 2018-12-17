@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_133141) do
+ActiveRecord::Schema.define(version: 2018_12_17_140121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2018_12_17_133141) do
     t.float "current_rent"
     t.integer "user_id"
     t.integer "address_id"
+    t.integer "package_id"
   end
 
   create_table "sold_properties", force: :cascade do |t|
