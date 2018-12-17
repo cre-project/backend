@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :operating_statement_fields
   resources :operating_statements
   resources :users
   resources :packages
