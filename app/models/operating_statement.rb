@@ -1,0 +1,2 @@
+class OperatingStatement < ApplicationRecord
+end
