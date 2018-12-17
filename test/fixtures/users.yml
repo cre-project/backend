@@ -6,8 +6,8 @@ mickey:
   email: mickey.mouse@gmail.com
   license_number: 1234
   phone_number: 3473016929
+  fax: 3473016929
   title: Dr.
-  description: He is a funny and cute mouse
   subscription_expiration: 2018-12-06
 
 donald:
@@ -16,6 +16,6 @@ donald:
   email: donald.duck@gmail.com
   license_number: 5678
   phone_number: 3473016929
+  fax: 3473016929
   title: Prof.
-  description: He is a greedy and rich duck
   subscription_expiration: 2018-12-06

@@ -1,6 +1,6 @@
 class CreateOperatingStatementFields < ActiveRecord::Migration[5.2]
   def change
-    create_table :operating_statement_fields do |t|
+    create_table :operating_statement_fields, id: :uuid do |t|
       t.string :name
       t.float :current_value
       t.float :potential_value

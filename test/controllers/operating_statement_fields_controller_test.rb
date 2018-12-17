@@ -12,7 +12,7 @@ class OperatingStatementFieldsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create operating_statement_field" do
     assert_difference('OperatingStatementField.count') do
-      post operating_statement_fields_url, params: { operating_statement_field: { current_value: @operating_statement_field.current_value, is_income: @operating_statement_field.is_income, name: @operating_statement_field.name, operating_statement_id: @operating_statement_field.operating_statement_id, potential_value: @operating_statement_field.potential_value } }, as: :json
+      post operating_statement_fields_url, params: { operating_statement_field: { current_value: @operating_statement_field.current_value, is_income: @operating_statement_field.is_income, name: @operating_statement_field.name, operating_statement_id: @operating_statement_field.operating_statement_id, potential_value: @operating_statement_field.potential_value, operating_statement_id: @operating_statement_field.operating_statement_id } }, as: :json
     end
 
     assert_response 201

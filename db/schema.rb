@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_161214) do
+ActiveRecord::Schema.define(version: 2018_12_17_192900) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "street"
     t.string "city"
     t.string "state"
@@ -24,41 +25,41 @@ ActiveRecord::Schema.define(version: 2018_12_17_161214) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "companies", force: :cascade do |t|
+  create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "website_url"
     t.string "logo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "address_id"
+    t.uuid "address_id"
   end
 
-  create_table "operating_statement_fields", force: :cascade do |t|
+  create_table "operating_statement_fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.float "current_value"
     t.float "potential_value"
     t.boolean "is_income", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "operating_statement_id"
+    t.uuid "operating_statement_id"
   end
 
-  create_table "operating_statements", force: :cascade do |t|
+  create_table "operating_statements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "packages", force: :cascade do |t|
-    t.integer "property_id"
-    t.integer "rented_unit_id"
-    t.integer "sold_property_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "template", default: "default"
-    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "property_id"
+    t.uuid "rented_unit_id"
+    t.uuid "sold_property_id"
+    t.uuid "user_id"
   end
 
-  create_table "properties", force: :cascade do |t|
+  create_table "properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.integer "year_built"
     t.integer "number_of_stories"
@@ -68,35 +69,34 @@ ActiveRecord::Schema.define(version: 2018_12_17_161214) do
     t.float "total_square_feet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "package_id"
-    t.integer "user_id"
-    t.integer "address_id"
+    t.uuid "package_id"
+    t.uuid "user_id"
+    t.uuid "address_id"
   end
 
-  create_table "property_units", force: :cascade do |t|
+  create_table "property_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "bedrooms"
     t.float "bathrooms"
     t.float "current_rent"
     t.float "potential_rent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "property_id"
+    t.uuid "property_id"
   end
 
-  create_table "rented_units", force: :cascade do |t|
+  create_table "rented_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "year_built"
     t.integer "bedrooms"
     t.float "bathrooms"
     t.string "image_url"
+    t.float "current_rent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "current_rent"
-    t.integer "user_id"
-    t.integer "address_id"
-    t.integer "package_id"
+    t.uuid "user_id"
+    t.uuid "address_id"
   end
 
-  create_table "sold_properties", force: :cascade do |t|
+  create_table "sold_properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "year_built"
     t.float "sales_price"
     t.integer "num_units"
@@ -104,15 +104,14 @@ ActiveRecord::Schema.define(version: 2018_12_17_161214) do
     t.float "grm"
     t.date "close_of_escrow"
     t.string "image_url"
+    t.float "square_feet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "square_feet"
-    t.integer "user_id"
-    t.integer "address_id"
-    t.integer "package_id"
+    t.uuid "user_id"
+    t.uuid "address_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -120,9 +119,9 @@ ActiveRecord::Schema.define(version: 2018_12_17_161214) do
     t.string "phone_number"
     t.string "title"
     t.date "subscription_expiration"
+    t.string "fax"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "fax"
   end
 
 end

@@ -47,6 +47,6 @@ class PackagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def package_params
-      params.require(:package).permit(:template, :property_id, :rented_unit_id, :user_id)
+      params.require(:package).permit(:template, :property_id, :sold_property_id, :rented_unit_id, :user_id)
     end
 end

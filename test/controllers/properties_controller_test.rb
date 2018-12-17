@@ -12,7 +12,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create property" do
     assert_difference('Property.count') do
-      post properties_url, params: { property: { apn: @property.apn, lot_size: @property.lot_size, name: @property.name, number_of_stories: @property.number_of_stories, price: @property.price, total_square_feet: @property.total_square_feet, year_built: @property.year_built, user_id: @property.user_id, package_id: @property.package_id } }, as: :json
+      post properties_url, params: { property: { name: @property.name, year_built: @property.year_built, number_of_stories: @property.number_of_stories, lot_size: @property.lot_size, apn: @property.apn, price: @property.price, total_square_feet: @property.total_square_feet, user_id: @property.user_id } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update property" do
-    patch property_url(@property), params: { property: { apn: @property.apn, lot_size: @property.lot_size, name: @property.name, number_of_stories: @property.number_of_stories, price: @property.price, total_square_feet: @property.total_square_feet, year_built: @property.year_built } }, as: :json
+    patch property_url(@property), params: { property: { name: @property.name, year_built: @property.year_built, number_of_stories: @property.number_of_stories, lot_size: @property.lot_size, apn: @property.apn, price: @property.price, total_square_feet: @property.total_square_feet, user_id: @property.user_id } }, as: :json
     assert_response 200
   end
 

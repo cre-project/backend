@@ -7,7 +7,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user" do
     assert_difference('User.count') do
-      post users_url, params: { user: { description: @user.description, email: 'goofy.dog@gmail.com', first_name: @user.first_name, last_name: @user.last_name, license_number: @user.license_number, phone_number: @user.phone_number, subscription_expiration: @user.subscription_expiration, title: @user.title } }, as: :json
+      post users_url, params: { user: { first_name: @user.first_name, last_name: @user.last_name, email: 'goofy.dog@gmail.com', license_number: @user.license_number, phone_number: @user.phone_number, fax: @user.fax, subscription_expiration: @user.subscription_expiration, title: @user.title } }, as: :json
     end
 
     assert_response 201
@@ -19,7 +19,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update user" do
-    patch user_url(@user), params: { user: { description: @user.description, email: @user.email, first_name: @user.first_name, last_name: @user.last_name, license_number: @user.license_number, phone_number: @user.phone_number, subscription_expiration: @user.subscription_expiration, title: @user.title } }, as: :json
+    patch user_url(@user), params: { user: { first_name: @user.first_name, last_name: @user.last_name, email: 'goofy.dog@gmail.com', license_number: @user.license_number, phone_number: @user.phone_number, fax: @user.fax, subscription_expiration: @user.subscription_expiration, title: @user.title } }, as: :json
     assert_response 200
   end
 
