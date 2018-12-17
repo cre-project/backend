@@ -13,4 +13,5 @@ class User < ApplicationRecord
 
   # us phone number
   validates_format_of :phone_number, with: /\d[0-9]{9}/, allow_nil: true
+  validates_format_of :fax, with: /\d[0-9]{9}/, allow_nil: true
 end
