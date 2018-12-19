@@ -1,4 +1,4 @@
-class SoldProperty < ApplicationRecord
+class Api::SoldProperty < ApplicationRecord
   # associations
   belongs_to :user
   has_one :address

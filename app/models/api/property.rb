@@ -1,4 +1,4 @@
-class Property < ApplicationRecord
+class Api::Property < ApplicationRecord
   # associations
   belongs_to :user
   has_many :property_units

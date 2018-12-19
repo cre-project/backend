@@ -1,4 +1,4 @@
-class Company < ApplicationRecord
+class Api::Company < ApplicationRecord
   # associations
   has_one :address
 

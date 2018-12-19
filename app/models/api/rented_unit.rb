@@ -1,4 +1,4 @@
-class RentedUnit < ApplicationRecord
+class Api::RentedUnit < ApplicationRecord
   # associations
   belongs_to :user
   has_one :address

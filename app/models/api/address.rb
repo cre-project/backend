@@ -1,4 +1,4 @@
-class Address < ApplicationRecord
+class Api::Address < ApplicationRecord
   # mandatory fields
   validates :street, presence: true
   validates :city, presence: true
