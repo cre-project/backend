@@ -1,15 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
-  current_value: 1.5
-  potential_value: 1.5
+  name: Operating Statement 1
+  current_value: 150000
+  potential_value: 170000
   is_income: false
   operating_statement: one
 
 two:
-  name: MyString
-  current_value: 1.5
-  potential_value: 1.5
-  is_income: false
+  name: Operating Statement 2
+  current_value: 450000
+  potential_value: 550000
+  is_income: true
   operating_statement: two

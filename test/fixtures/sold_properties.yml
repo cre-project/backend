@@ -1,23 +1,21 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  year_built: 1
-  sales_price: 1.5
-  num_units: 1
-  cap_rate: 1.5
-  grm: 1.5
+  year_built: 1999
+  sales_price: 150000
+  num_units: 4
+  cap_rate: 5.6
+  grm: 24.5
   close_of_escrow: 2018-12-17
-  image_url: MyString
-  square_feet: 1.5
+  image_url: https://sold-property/1/image
+  square_feet: 14.5
   user: mickey
 
 two:
-  year_built: 1
-  sales_price: 1.5
-  num_units: 1
-  cap_rate: 1.5
-  grm: 1.5
+  year_built: 2000
+  sales_price: 1400000
+  num_units: 3
+  cap_rate: 98.5
+  grm: 23.1
   close_of_escrow: 2018-12-17
-  image_url: MyString
-  square_feet: 1.5
+  image_url: https://sold-property/2/image
+  square_feet: 174.4
   user: donald

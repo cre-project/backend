@@ -1,17 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  year_built: 1
-  bedrooms: 1
-  bathrooms: 1.5
-  image_url: MyString
+  year_built: 1960
+  bedrooms: 2
+  bathrooms: 2.5
+  image_url: https://rented-units/1/image
   current_rent: 1.5
   user: mickey
 
 two:
-  year_built: 1
+  year_built: 2018
   bedrooms: 1
-  bathrooms: 1.5
-  image_url: MyString
+  bathrooms: 3
+  image_url: https://rented-units/2/image
   current_rent: 1.5
   user: donald

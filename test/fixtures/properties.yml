@@ -1,21 +1,19 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
   name: Wernli Villa
   year_built: 1950
-  number_of_stories: 1
-  lot_size: 1.5
-  apn: MyString
-  price: 1.5
-  total_square_feet: 1.5
+  number_of_stories: 2
+  lot_size: 2.5
+  apn: 1-34545-dsdfn
+  price: 140000
+  total_square_feet: 34
   user: mickey
 
 two:
   name: Steigenberger Hotel
   year_built: 2000
-  number_of_stories: 1
-  lot_size: 1.5
-  apn: MyString
-  price: 1.5
-  total_square_feet: 1.5
+  number_of_stories: 3
+  lot_size: 3.5
+  apn: 5645-sdfasdfas
+  price: 290000
+  total_square_feet: 87
   user: donald
