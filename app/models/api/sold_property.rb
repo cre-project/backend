@@ -2,6 +2,8 @@ class Api::SoldProperty < ApplicationRecord
   # associations
   belongs_to :user
   has_one :address
+  has_many :package_sold_properties
+  has_many :packages, :through => :package_sold_properties
 
   # positive fields
   validates_numericality_of :year_built, :greater_than => 0.0
