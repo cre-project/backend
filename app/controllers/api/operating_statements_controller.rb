@@ -11,6 +11,7 @@ module Api
     # GET /operating_statements/1
     # GET /operating_statements/1.json
     def show
+      render json: @operating_statement
     end
 
     # POST /operating_statements
@@ -19,7 +20,7 @@ module Api
       @operating_statement = OperatingStatement.new(operating_statement_params)
 
       if @operating_statement.save
-        render :show, status: :created, location: @operating_statement
+        render json: @operating_statement, status: :created, location: @operating_statement
       else
         render json: @operating_statement.errors, status: :unprocessable_entity
       end
@@ -29,7 +30,7 @@ module Api
     # PATCH/PUT /operating_statements/1.json
     def update
       if @operating_statement.update(operating_statement_params)
-        render :show, status: :ok, location: @operating_statement
+        render json: @operating_statement, status: :ok, location: @operating_statement
       else
         render json: @operating_statement.errors, status: :unprocessable_entity
       end

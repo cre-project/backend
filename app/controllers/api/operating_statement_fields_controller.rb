@@ -19,7 +19,7 @@ module Api
       @operating_statement_field = OperatingStatementField.new(operating_statement_field_params)
 
       if @operating_statement_field.save
-        render :show, status: :created, location: @operating_statement_field
+        render json: @operating_statement_field, status: :created, location: @operating_statement_field
       else
         render json: @operating_statement_field.errors, status: :unprocessable_entity
       end
@@ -29,7 +29,7 @@ module Api
     # PATCH/PUT /operating_statement_fields/1.json
     def update
       if @operating_statement_field.update(operating_statement_field_params)
-        render :show, status: :ok, location: @operating_statement_field
+        render json: @operating_statement_field, status: :ok, location: @operating_statement_field
       else
         render json: @operating_statement_field.errors, status: :unprocessable_entity
       end

@@ -1,1 +1,0 @@
-json.partial! "operating_statement_fields/operating_statement_field", operating_statement_field: @operating_statement_field
