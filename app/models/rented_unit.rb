@@ -11,11 +11,13 @@ class RentedUnit < ApplicationRecord
   validates :current_rent, presence: true
 
   # positive fields
-  validates_numericality_of :year_built, :greater_than => 0.0
   validates_numericality_of :current_rent, :greater_than => 0.0
 
   # number range
   validates :bedrooms, inclusion: { in: 0..4 }
   validates :bathrooms, inclusion: { in: [1, 1.5, 2, 2.5, 3],
     message: "%{value} is not a valid number for bathrooms" }
+
+  # number range
+  validates :year_built, inclusion: { in: 1500..2050 }
 end
