@@ -3,8 +3,6 @@ class Api::Property < ApplicationRecord
   belongs_to :user
   has_many :property_units
   has_one :address
-  has_many :package_sold_properties
-  has_many :sold_properties, :through => :package_sold_properties
 
   # mandatory fields
   validates :price, presence: true

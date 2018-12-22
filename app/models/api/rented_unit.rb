@@ -3,6 +3,9 @@ class Api::RentedUnit < ApplicationRecord
   belongs_to :user
   has_one :address
 
+  has_many :package_rented_units
+  has_many :packages, :through => :package_rented_units
+
   # mandatory fields
   validates :bedrooms, presence: true
   validates :current_rent, presence: true

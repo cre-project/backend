@@ -2,6 +2,7 @@ class Api::SoldProperty < ApplicationRecord
   # associations
   belongs_to :user
   has_one :address
+
   has_many :package_sold_properties
   has_many :packages, :through => :package_sold_properties
 
