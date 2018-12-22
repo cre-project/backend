@@ -1,4 +1,4 @@
-class Api::PackageSoldProperty < ApplicationRecord
+class PackageSoldProperty < ApplicationRecord
   belongs_to :package
   belongs_to :sold_property
 end

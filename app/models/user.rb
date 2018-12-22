@@ -1,4 +1,4 @@
-class Api::User < ApplicationRecord
+class User < ApplicationRecord
   # associations
   has_many :packages
   has_many :properties

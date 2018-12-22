@@ -1,4 +1,4 @@
-class Api::Package < ApplicationRecord
+class Package < ApplicationRecord
   # associations
   belongs_to :user
   has_one :property

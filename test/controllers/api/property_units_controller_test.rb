@@ -6,13 +6,13 @@ class PropertyUnitsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get property_units_url, as: :json
+    get api_property_units_url, as: :json
     assert_response :success
   end
 
   test "should create property_unit" do
     assert_difference('PropertyUnit.count') do
-      post property_units_url, params: { property_unit: { bathrooms: @property_unit.bathrooms, bedrooms: @property_unit.bedrooms, current_rent: @property_unit.current_rent, potential_rent: @property_unit.potential_rent, property_id: @property_unit.property_id } }, as: :json
+      post api_property_units_url, params: { property_unit: { bathrooms: @property_unit.bathrooms, bedrooms: @property_unit.bedrooms, current_rent: @property_unit.current_rent, potential_rent: @property_unit.potential_rent, property_id: @property_unit.property_id } }, as: :json
     end
 
     assert_response 201
@@ -20,7 +20,7 @@ class PropertyUnitsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy property_unit" do
     assert_difference('PropertyUnit.count', -1) do
-      delete property_unit_url(@property_unit), as: :json
+      delete api_property_unit_url(@property_unit), as: :json
     end
 
     assert_response 204
