@@ -5,7 +5,9 @@ module Api
     # GET /operating_statements
     # GET /operating_statements.json
     def index
-      @operating_statements = OperatingStatement.all
+      @operating_statements = OperatingStatement.all.order('created_at DESC')
+
+      render json: @operating_statements
     end
 
     # GET /operating_statements/1

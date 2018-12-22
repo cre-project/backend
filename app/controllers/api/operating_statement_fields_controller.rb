@@ -5,12 +5,15 @@ module Api
     # GET /operating_statement_fields
     # GET /operating_statement_fields.json
     def index
-      @operating_statement_fields = OperatingStatementField.all
+      @operating_statement_fields = OperatingStatementField.all.order('created_at DESC')
+
+      render json: @operating_statement_fields
     end
 
     # GET /operating_statement_fields/1
     # GET /operating_statement_fields/1.json
     def show
+      render json: @operating_statement_field
     end
 
     # POST /operating_statement_fields
