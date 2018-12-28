@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "/healthcheck", to: proc { [200, {}, ["OK"]] }
   namespace 'api' do
     resources :operating_statement_fields
     resources :operating_statements
