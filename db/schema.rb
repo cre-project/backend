@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2018_12_28_193424) do
   end
 
   create_table "operating_statement_fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.float "current_value"
     t.float "potential_value"
-    t.boolean "is_income", default: false
+    t.boolean "is_income", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "operating_statement_id"
@@ -79,13 +79,13 @@ ActiveRecord::Schema.define(version: 2018_12_28_193424) do
     t.integer "number_of_stories"
     t.float "lot_size"
     t.string "apn"
-    t.float "price"
+    t.float "price", null: false
     t.float "total_square_feet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "package_id"
     t.uuid "user_id"
-    t.uuid "address_id"
+    t.uuid "address_id", null: false
   end
 
   create_table "property_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -100,10 +100,10 @@ ActiveRecord::Schema.define(version: 2018_12_28_193424) do
 
   create_table "rented_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "year_built"
-    t.integer "bedrooms"
+    t.integer "bedrooms", null: false
     t.float "bathrooms"
     t.string "image_url"
-    t.float "current_rent"
+    t.float "current_rent", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2018_12_28_193424) do
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
+    t.string "email", null: false
     t.string "license_number"
     t.string "phone_number"
     t.string "title"

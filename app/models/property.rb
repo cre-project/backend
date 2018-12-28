@@ -3,7 +3,7 @@ class Property < ApplicationRecord
   has_many :property_units
   has_one :address
 
-  validates :price, :apn, presence: true
+  validates :price, presence: true
 
   validates_numericality_of :price, :number_of_stories, :lot_size, greater_than: 0
 
