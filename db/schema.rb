@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_22_201249) do
+ActiveRecord::Schema.define(version: 2018_12_28_193424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(version: 2018_12_22_201249) do
   end
 
   create_table "property_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "bedrooms"
-    t.float "bathrooms"
-    t.float "current_rent"
+    t.integer "bedrooms", null: false
+    t.float "bathrooms", null: false
+    t.float "current_rent", null: false
     t.float "potential_rent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
