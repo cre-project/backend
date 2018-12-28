@@ -1,7 +1,3 @@
 class Address < ApplicationRecord
-  # mandatory fields
-  validates :street, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :zip, presence: true
+  validates :street, :city, :state, :zip, presence: true
 end
