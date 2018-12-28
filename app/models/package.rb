@@ -1,8 +1,6 @@
 class Package < ApplicationRecord
   belongs_to :user
   has_one :property
-  has_many :sold_properties
-  has_many :rented_units
 
   has_many :package_sold_properties
   has_many :sold_properties, through: :package_sold_properties
