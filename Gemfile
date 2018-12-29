@@ -52,3 +52,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Jbuilder for API responses
 gem 'jbuilder', '~> 2.5'
 gem 'active_model_serializers', '~> 0.10.0'
+
+# User authentication
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
+gem 'simple_command'
