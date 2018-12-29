@@ -57,3 +57,6 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'simple_command'
+
+# Debugging
+gem 'pry-rails', :group => :development
