@@ -1,4 +1,5 @@
 require_relative 'boot'
+require_relative '../lib/json_web_token.rb'
 
 require "rails"
 # Pick the frameworks you want:
