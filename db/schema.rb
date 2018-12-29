@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "address_id"
+    t.index ["address_id"], name: "index_companies_on_address_id"
   end
 
   create_table "operating_statement_fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "operating_statement_id"
+    t.index ["operating_statement_id"], name: "index_operating_statement_fields_on_operating_statement_id"
   end
 
   create_table "operating_statements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -54,6 +56,8 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "updated_at", null: false
     t.uuid "package_id"
     t.uuid "rented_unit_id"
+    t.index ["package_id"], name: "index_package_rented_units_on_package_id"
+    t.index ["rented_unit_id"], name: "index_package_rented_units_on_rented_unit_id"
   end
 
   create_table "package_sold_properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -61,6 +65,8 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "updated_at", null: false
     t.uuid "package_id"
     t.uuid "sold_property_id"
+    t.index ["package_id"], name: "index_package_sold_properties_on_package_id"
+    t.index ["sold_property_id"], name: "index_package_sold_properties_on_sold_property_id"
   end
 
   create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -69,6 +75,8 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "updated_at", null: false
     t.uuid "property_id"
     t.uuid "user_id"
+    t.index ["property_id"], name: "index_packages_on_property_id"
+    t.index ["user_id"], name: "index_packages_on_user_id"
   end
 
   create_table "properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -84,6 +92,9 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.uuid "package_id"
     t.uuid "user_id"
     t.uuid "address_id", null: false
+    t.index ["address_id"], name: "index_properties_on_address_id"
+    t.index ["package_id"], name: "index_properties_on_package_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "property_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -94,6 +105,7 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "property_id"
+    t.index ["property_id"], name: "index_property_units_on_property_id"
   end
 
   create_table "rented_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -106,6 +118,8 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.uuid "address_id"
+    t.index ["address_id"], name: "index_rented_units_on_address_id"
+    t.index ["user_id"], name: "index_rented_units_on_user_id"
   end
 
   create_table "sold_properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -121,6 +135,8 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.uuid "address_id"
+    t.index ["address_id"], name: "index_sold_properties_on_address_id"
+    t.index ["user_id"], name: "index_sold_properties_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -138,4 +154,20 @@ ActiveRecord::Schema.define(version: 2018_12_29_141449) do
     t.string "picture_url"
   end
 
+  add_foreign_key "companies", "addresses"
+  add_foreign_key "operating_statement_fields", "operating_statements"
+  add_foreign_key "package_rented_units", "packages"
+  add_foreign_key "package_rented_units", "rented_units"
+  add_foreign_key "package_sold_properties", "packages"
+  add_foreign_key "package_sold_properties", "sold_properties"
+  add_foreign_key "packages", "properties"
+  add_foreign_key "packages", "users"
+  add_foreign_key "properties", "addresses"
+  add_foreign_key "properties", "packages"
+  add_foreign_key "properties", "users"
+  add_foreign_key "property_units", "properties"
+  add_foreign_key "rented_units", "addresses"
+  add_foreign_key "rented_units", "users"
+  add_foreign_key "sold_properties", "addresses"
+  add_foreign_key "sold_properties", "users"
 end

@@ -1,6 +1,6 @@
 class AddDependenciesToSoldProperties < ActiveRecord::Migration[5.2]
   def change
-    add_column :sold_properties, :user_id, :uuid
-    add_column :sold_properties, :address_id, :uuid
+    add_reference :sold_properties, :user, type: :uuid, foreign_key: true
+    add_reference :sold_properties, :address, type: :uuid, foreign_key: true
   end
 end

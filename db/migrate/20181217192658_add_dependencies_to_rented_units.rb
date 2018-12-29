@@ -1,6 +1,6 @@
 class AddDependenciesToRentedUnits < ActiveRecord::Migration[5.2]
   def change
-    add_column :rented_units, :user_id, :uuid
-    add_column :rented_units, :address_id, :uuid
+    add_reference :rented_units, :user, type: :uuid, foreign_key: true
+    add_reference :rented_units, :address, type: :uuid, foreign_key: true
   end
 end

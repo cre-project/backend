@@ -1,6 +1,6 @@
 class AddDependenciesToPackageRentedUnit < ActiveRecord::Migration[5.2]
   def change
-    add_column :package_rented_units, :package_id, :uuid
-    add_column :package_rented_units, :rented_unit_id, :uuid
+    add_reference :package_rented_units, :package, type: :uuid, foreign_key: true
+    add_reference :package_rented_units, :rented_unit, type: :uuid, foreign_key: true
   end
 end
