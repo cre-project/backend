@@ -9,4 +9,12 @@ class Package < ApplicationRecord
   has_many :rented_units, through: :package_rented_units
 
   validates :template, presence: true
+
+  def as_json(options={})
+    super(
+        include: {
+          user: {}
+        }
+    )
+  end
 end
