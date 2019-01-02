@@ -35,7 +35,7 @@ Rails.application.configure do
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.smtp_settings = {
-      :address  => "10.12.34.56",
+      :address  => "Smtp.gmail.com",
       :port  => 25,
       :domain  => 'localhost',
       :openssl_verify_mode  => 'none'
