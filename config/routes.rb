@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :package_sold_properties
     resources :package_rented_units
     post 'authenticate', to: '/api/authentication#authenticate'
+    post 'passwords/request_reset', to: 'passwords#request_reset'
+    post 'passwords/reset', to: 'passwords#reset'
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
