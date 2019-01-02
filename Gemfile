@@ -60,3 +60,6 @@ gem 'simple_command'
 
 # Debugging
 gem 'pry-rails', :group => :development
+
+# Haml
+gem "haml-rails", "~> 1.0"
