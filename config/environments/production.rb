@@ -59,7 +59,7 @@ Rails.application.configure do
     config.action_mailer.smtp_settings = {
       :address  => "10.12.34.56",
       :port  => 25,
-      :domain  => 'https://cre-backend-testing.herokuapp.com'
+      :domain  => 'cre-backend-testing.herokuapp.com'
     }
 
   # Ignore bad email addresses and do not raise email delivery errors.
