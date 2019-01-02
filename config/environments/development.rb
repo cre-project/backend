@@ -37,7 +37,8 @@ Rails.application.configure do
     config.action_mailer.smtp_settings = {
       :address  => "10.12.34.56",
       :port  => 25,
-      :domain  => 'localhost'
+      :domain  => 'localhost',
+      :openssl_verify_mode  => 'none'
     }
 
     config.action_mailer.default_url_options = { :host => 'localhost:3000' }
