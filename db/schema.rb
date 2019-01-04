@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_30_202545) do
+ActiveRecord::Schema.define(version: 2019_01_03_125334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -154,6 +154,8 @@ ActiveRecord::Schema.define(version: 2018_12_30_202545) do
     t.string "picture_url"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.string "pabbly_customer_id"
+    t.string "subscription"
   end
 
   add_foreign_key "companies", "addresses"
