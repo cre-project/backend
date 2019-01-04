@@ -1,5 +1,6 @@
 require "rails_helper"
 require "json"
+require "spec_helper"
 
 class CreateUserTest < ActionDispatch::IntegrationTest
 
@@ -54,35 +55,8 @@ class CreateUserTest < ActionDispatch::IntegrationTest
       "create_time": "2018-10-11T06:11:25.184Z"
     }').to_json
 
-    pabbly_user = JSON.parse('{
-      "status": "success",
-      "message": "Customer data",
-      "data": {
-          "user_id": "5a4b5db47cfab6872a7feafa",
-          "first_name" : "Lance",
-          "last_name" : "Crews",
-          "user_name": "LanceCrews",
-          "email_id" : "LanceSCrews@teleworm.us",
-          "pcustomer_id": "5a4b776f7cfab6872a7feb06",
-          "billing_address": {
-              "street1": "",
-              "city": null,
-              "state": null,
-              "zip_code": null,
-              "country": null
-          },
-          "credit": {
-              "remaining": 0
-          },
-          "createdAt": "2018-01-02T12:16:05.496Z",
-          "updatedAt": "2018-01-02T12:16:05.496Z",
-          "id": "5a4b78053152df337d841348"
-      }
-    }').to_json
-
     it "creates user" do
       post "/api/users", params: request_body, headers: { 'CONTENT_TYPE' => 'application/json' }
-      binding.pry
       assert_equal 201, status
     end
   end

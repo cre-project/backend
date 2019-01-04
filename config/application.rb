@@ -13,6 +13,7 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require './lib/middleware/consider_all_request_json_middleware'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,6 +21,9 @@ Bundler.require(*Rails.groups)
 
 module CreBackend
   class Application < Rails::Application
+    # Translates all requests to content-type: application/json
+    config.middleware.insert_before(ActionDispatch::Static,ConsiderAllRequestJsonMiddleware)
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
