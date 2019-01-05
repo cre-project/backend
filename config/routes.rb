@@ -3,13 +3,14 @@ Rails.application.routes.draw do
   namespace 'api' do
     resources :operating_statement_fields
     resources :operating_statements
-    resources :users
+    resources :users do
+      resources :companies
+    end
     resources :packages
     resources :sold_properties
     resources :rented_units
     resources :property_units
     resources :properties
-    resources :companies
     resources :addresses
     resources :package_sold_properties
     resources :package_rented_units

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_03_125334) do
+ActiveRecord::Schema.define(version: 2019_01_05_114828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -32,7 +32,9 @@ ActiveRecord::Schema.define(version: 2019_01_03_125334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "address_id"
+    t.uuid "user_id"
     t.index ["address_id"], name: "index_companies_on_address_id"
+    t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
   create_table "operating_statement_fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -156,6 +158,8 @@ ActiveRecord::Schema.define(version: 2019_01_03_125334) do
     t.datetime "reset_password_sent_at"
     t.string "pabbly_customer_id"
     t.string "subscription"
+    t.uuid "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
   end
 
   add_foreign_key "companies", "addresses"
@@ -174,4 +178,5 @@ ActiveRecord::Schema.define(version: 2019_01_03_125334) do
   add_foreign_key "rented_units", "users"
   add_foreign_key "sold_properties", "addresses"
   add_foreign_key "sold_properties", "users"
+  add_foreign_key "users", "companies"
 end

@@ -19,7 +19,9 @@ module Api
       first_name = pabbly_user["data"]["first_name"]
       last_name = pabbly_user["data"]["last_name"]
       email = pabbly_user["data"]["email_id"]
+
       @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id, subscription_expiration: subscription_expiration, subscription: subscription)
+      @user.company = Company.create(name: company_name)
 
       if @user.present?
         render json: @user, status: :created
@@ -48,7 +50,7 @@ module Api
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :password_digest, :email, :license_number, :phone_number, :fax, :title, :subscription_expiration, :picture_url, :pabbly_customer_id, :subscription)
+      params.require(:user).permit(:first_name, :last_name, :password_digest, :email, :license_number, :phone_number, :fax, :title, :subscription_expiration, :picture_url, :pabbly_customer_id, :subscription, company_attributes: [ :name, :website_url, :logo_url, :address_id ])
     end
   end
 end
