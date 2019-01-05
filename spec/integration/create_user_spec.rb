@@ -1,6 +1,5 @@
-require "rails_helper"
-require "json"
 require "spec_helper"
+require "rails_helper"
 
 class CreateUserTest < ActionDispatch::IntegrationTest
 

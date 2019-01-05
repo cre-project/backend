@@ -8,7 +8,6 @@ module Api
       end
 
       user = User.find_by(email: params[:email].downcase)
-
       if user.present?
         user.generate_password_token!
         ::PasswordResetMailer.with(user: user).reset_password_email.deliver_now
