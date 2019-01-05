@@ -21,7 +21,7 @@ module Api
     end
 
     def update
-      if @operating_statement_field.update(operating_statement_field_params)
+      if @operating_statement_field.update(edit_params)
         render json: @operating_statement_field, status: :ok
       else
         render json: @operating_statement_field.errors, status: :unprocessable_entity
@@ -39,6 +39,10 @@ module Api
 
       def operating_statement_field_params
         params.require(:operating_statement_field).permit(:name, :current_value, :potential_value, :is_income, :operating_statement_id)
+      end
+
+      def edit_params
+        params.require(:operating_statement_field).permit(:name, :current_value, :potential_value)
       end
   end
 end
