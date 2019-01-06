@@ -29,7 +29,7 @@ module Api
       else
         logger.info 'Customer cannot be created'
       end
-      if @user.save
+      if @user.present? && @user.save
         render json: @user, status: :ok
       else
         logger.info 'Customer cannot be created'
