@@ -8,35 +8,36 @@ module Api
     end
 
     def create
-      # if params[:data][:customer_id].present? && params[:data][:expiry_date].present? && params[:data][:plan][:plan_code].present?
-      #   pabbly_customer_id = params[:data][:customer_id]
-      #   subscription_expiration = params[:data][:expiry_date]
-      #   subscription = params[:data][:plan][:plan_code]
+      logger.info "Responding with #{request}"
+      logger.info "Responding with #{request.body}"
+      logger.info "Responding with #{params}"
+      if params[:data][:customer_id].present? && params[:data][:expiry_date].present? && params[:data][:plan][:plan_code].present?
+        pabbly_customer_id = params[:data][:customer_id]
+        subscription_expiration = params[:data][:expiry_date]
+        subscription = params[:data][:plan][:plan_code]
 
-      #   auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
-      #   pabbly_user = HTTParty.get('https://payments.pabbly.com/api/v1/customer/' + pabbly_customer_id, basic_auth: auth)
-      #   if pabbly_user["status"] == "success"
-      #     company_name = pabbly_user["data"]["company_name"]
-      #     first_name = pabbly_user["data"]["first_name"]
-      #     last_name = pabbly_user["data"]["last_name"]
-      #     email = pabbly_user["data"]["email_id"]
+        auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
+        pabbly_user = HTTParty.get('https://payments.pabbly.com/api/v1/customer/' + pabbly_customer_id, basic_auth: auth)
+        if pabbly_user["status"] == "success"
+          company_name = pabbly_user["data"]["company_name"]
+          first_name = pabbly_user["data"]["first_name"]
+          last_name = pabbly_user["data"]["last_name"]
+          email = pabbly_user["data"]["email_id"]
 
-      #     @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id, subscription_expiration: subscription_expiration, subscription: subscription)
-      #     @user.company = Company.create(name: company_name)
-      #   else
-      #     logger.info 'Customer cannot be created'
-      #   end
-      # else
-      #   logger.info 'Customer cannot be created'
-      # end
-      # if @user.present? && @user.save
-      #   render json: @user, status: :ok
-      # else
-      #   logger.info 'Customer cannot be created'
-      #   render body: nil, status: :ok
-      # end
-      logger.info 'Customer cannot be created'
-      render body: nil, status: :ok
+          @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id, subscription_expiration: subscription_expiration, subscription: subscription)
+          @user.company = Company.create(name: company_name)
+        else
+          logger.info 'Customer cannot be created'
+        end
+      else
+        logger.info 'Customer cannot be created'
+      end
+      if @user.present? && @user.save
+        render json: @user, status: :ok
+      else
+        logger.info 'Customer cannot be created'
+        render body: nil, status: :ok
+      end
     end
 
     def update
