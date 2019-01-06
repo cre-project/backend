@@ -15,7 +15,7 @@ module Api
 
         auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
         pabbly_user = HTTParty.get('https://payments.pabbly.com/api/v1/customer/' + pabbly_customer_id, basic_auth: auth)
-        if pabbly_user.present?
+        if pabbly_user["status"] == "success"
           company_name = pabbly_user["data"]["company_name"]
           first_name = pabbly_user["data"]["first_name"]
           last_name = pabbly_user["data"]["last_name"]
@@ -29,9 +29,10 @@ module Api
       else
         logger.info 'Customer cannot be created'
       end
-      if @user
+      if @user.save
         render json: @user, status: :ok
       else
+        logger.info 'Customer cannot be created'
         render body: nil, status: :ok
       end
     end

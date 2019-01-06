@@ -4,7 +4,7 @@ class ConsiderAllRequestJsonMiddleware
   end
 
   def call(env)
-    if env["CONTENT_TYPE"] == 'application/x-www-form-urlencoded'
+    if env["CONTENT_TYPE"] == 'text/plain'
       env["CONTENT_TYPE"] = 'application/json'
     end
     @app.call(env)
