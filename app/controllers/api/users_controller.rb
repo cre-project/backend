@@ -57,7 +57,7 @@ module Api
     def pabbly_redirect
       pabbly_customer_id = params[:customer_id]
       auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
-      pabbly_response = HTTParty.post('https://payments.pabbly.com/api/v1/portal_sessions/', basic_auth: auth, body: { customer_id: pabbly_customer_id })
+      pabbly_response = HTTParty.post('https://payments.pabbly.com/api/v1/portal_sessions/' + pabbly_customer_id, basic_auth: auth, body: { customer_id: pabbly_customer_id })
       if pabbly_response
         customer_portal_url = pabbly_response["data"]["access_url"]
         render json: { customer_portal_url: customer_portal_url }, status: :ok
