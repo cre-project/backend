@@ -8,10 +8,8 @@ module Api
     end
 
     def create
-      logger.info "Responding with #{request}"
-      logger.info "Responding with #{request.body}"
-      logger.info "Responding with #{params}"
-      if params[:data][:customer_id].present? && params[:data][:expiry_date].present? && params[:data][:plan][:plan_code].present?
+      data_params = get_data_params
+      if params[:data].present? && data_params[:customer_id].present? && data_params[:expiry_date].present? && data_params.dig(:plan, :plan_code).present?
         pabbly_customer_id = params[:data][:customer_id]
         subscription_expiration = params[:data][:expiry_date]
         subscription = params[:data][:plan][:plan_code]
@@ -27,15 +25,17 @@ module Api
           @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id, subscription_expiration: subscription_expiration, subscription: subscription)
           @user.company = Company.create(name: company_name)
         else
-          logger.info 'Customer cannot be created'
+          logger.error "Customer cannot be created because the params are falsly structured: #{params.inspect}"
         end
       else
-        logger.info 'Customer cannot be created'
+        logger.error "Customer cannot be created: #{params.inspect} (#{params.class.name})"
+        logger.error "Conditions are: #{params[:data].present?} && #{data_params[:customer_id].present?} && #{data_params[:expiry_date].present?} && #{data_params.dig(:plan, :plan_code).present?}"
       end
       if @user.present? && @user.save
         render json: @user, status: :ok
       else
-        logger.info 'Customer cannot be created'
+        user_errors = @user&.errors&.full_messages&.join(', ')
+        logger.error "Customer cannot be created: #{user_errors}"
         render body: nil, status: :ok
       end
     end
@@ -67,6 +67,10 @@ module Api
     end
 
     private
+    def get_data_params
+      params.require(:data).permit!
+    end
+
     def set_user
       @user = User.find(params[:id])
     end
