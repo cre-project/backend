@@ -65,5 +65,5 @@ gem "haml-rails", "~> 1.0"
 
 # External http requests
 gem 'httparty', '~> 0.13.7'
-
+gem 'rest-client', '~> 1.8'
 
