@@ -8,29 +8,20 @@ module Api
     end
 
     def create
-      logger.error "#{params["data"]}"
+      # logger.error "#{params["data"]}"
       data_params = params["data"].present? ? get_data_params : {}
-      if params["data"].present? && data_params["customer_id"].present? && data_params["expiry_date"].present? && data_params["product_id"].present?
-        pabbly_customer_id = data_params["customer_id"]
-        subscription_expiration = data_params["expiry_date"]
-        subscription = data_params["product_id"]
+      if params["data"].present? && data_params["id"].present? && data_params["company_name"].present? && data_params["first_name"].present? && data_params["last_name"].present? && data_params["email_id"].present?
+        email = data_params["email_id"]
+        first_name = data_params["first_name"]
+        last_name = data_params["last_name"]
+        pabbly_customer_id = data_params["id"]
+        company_name = data_params["company_name"]
 
-        auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
-        pabbly_user = HTTParty.get('https://payments.pabbly.com/api/v1/customer/' + pabbly_customer_id, basic_auth: auth)
-        if pabbly_user["status"] == "success"
-          company_name = pabbly_user["data"]["company_name"]
-          first_name = pabbly_user["data"]["first_name"]
-          last_name = pabbly_user["data"]["last_name"]
-          email = pabbly_user["data"]["email_id"]
+        @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id)
+        @user.company = Company.create(name: company_name)
 
-          @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id, subscription_expiration: subscription_expiration, subscription: subscription)
-          @user.company = Company.create(name: company_name)
-        else
-          logger.error "Customer cannot be created because the params are falsly structured: #{params.inspect}"
-        end
       else
         logger.error "Customer cannot be created: #{params.inspect} (#{params.class.name})"
-        logger.error "Conditions are: #{params["data"].present?} && #{data_params["customer_id"].present?} && #{data_params["expiry_date"].present?} && #{data_params["product_id"].present?}}"
       end
       if @user.present? && @user.save
         render json: @user, status: :ok
@@ -69,7 +60,7 @@ module Api
 
     private
     def get_data_params
-      params.require("data").permit("customer_id", "expiry_date", "product_id")
+      params.require("data").permit("email_id", "first_name", "last_name", "id", "company_name")
     end
 
     def set_user
