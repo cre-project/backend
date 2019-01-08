@@ -1,3 +1,5 @@
+require 'rest-client'
+
 module Api
   class PasswordsController < ApplicationController
     skip_before_action :authenticate_request
