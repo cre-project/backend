@@ -9,10 +9,10 @@ module Api
 
     def create
       data_params = params["data"].present? ? get_data_params : {}
-      if params["data"].present? && data_params["customer_id"].present? && data_params["expiry_date"].present? && data_params.dig("plan", "plan_code").present?
+      if params["data"].present? && data_params["customer_id"].present? && data_params["expiry_date"].present? && data_params["product_id"].present?.present?
         pabbly_customer_id = params["data"]["customer_id"]
         subscription_expiration = params["data"]["expiry_date"]
-        subscription = params["data"]["plan"]["plan_code"]
+        subscription = params["data"]["product_id"]
 
         auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
         pabbly_user = HTTParty.get('https://payments.pabbly.com/api/v1/customer/' + pabbly_customer_id, basic_auth: auth)
@@ -29,7 +29,7 @@ module Api
         end
       else
         logger.error "Customer cannot be created: #{params.inspect} (#{params.class.name})"
-        logger.error "Conditions are: #{params["data"].present?} && #{data_params["customer_id"].present?} && #{data_params["expiry_date"].present?} && #{data_params.dig("plan", "plan_code").present?}"
+        logger.error "Conditions are: #{params["data"].present?} && #{data_params["customer_id"].present?} && #{data_params["expiry_date"].present?} && #{data_params["product_id"].present?}}"
       end
       if @user.present? && @user.save
         render json: @user, status: :ok
@@ -68,7 +68,7 @@ module Api
 
     private
     def get_data_params
-      params.require("data").permit("customer_id", "expiry_date", "plan": ["plan_code"])
+      params.require("data").permit("customer_id", "expiry_date", "product_id")
     end
 
     def set_user
