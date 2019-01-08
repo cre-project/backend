@@ -68,7 +68,7 @@ module Api
 
     private
     def get_data_params
-      params[:data]
+      params.require(:data).permit(:customer_id, :expiry_date, :plan, :plan_code)
     end
 
     def set_user
