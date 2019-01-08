@@ -8,7 +8,7 @@ module Api
     end
 
     def create
-      data_params = get_data_params
+      data_params = params[:data].present? ? get_data_params : {}
       if params[:data].present? && data_params[:customer_id].present? && data_params[:expiry_date].present? && data_params.dig(:plan, :plan_code).present?
         pabbly_customer_id = params[:data][:customer_id]
         subscription_expiration = params[:data][:expiry_date]
