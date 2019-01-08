@@ -68,7 +68,7 @@ module Api
 
     private
     def get_data_params
-      params.require(:data)
+      params[:data]
     end
 
     def set_user
