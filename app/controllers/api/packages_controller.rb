@@ -3,33 +3,53 @@ module Api
     before_action :set_package, only: [:show, :update, :destroy]
 
     def index
-      render json: Package.all
+      if @current_user.present?
+        render json: Package.where(user_id: @current_user.id)
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def show
-      render json: @package
+      if @current_user.present? && @package.user_id == @current_user.id
+        render json: @package
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @package = Package.new(package_params)
+      if @current_user.present?
+        @package = @current_user.packages.build(package_params)
 
-      if @package.save
-        render json: @package, status: :created
+        if @package.save
+          render json: @package, status: :created
+        else
+          render json: @package.errors, status: :unprocessable_entity
+        end
       else
-        render json: @package.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def update
-      if @package.update(package_params)
-        render json: @package, status: :ok
+      if @current_user.present? && @package.user_id == @current_user.id
+        if @package.update(package_params)
+          render json: @package, status: :ok
+        else
+          render json: @package.errors, status: :unprocessable_entity
+        end
       else
-        render json: @package.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @package.destroy
+      if @current_user.present? && @package.user_id == @current_user.id
+        @package.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private
@@ -38,7 +58,7 @@ module Api
       end
 
       def package_params
-        params.require(:package).permit(:template, :property_id, :user_id, :image_urls)
+        params.require(:package).permit(:template, :property_id, :image_urls)
       end
   end
 end
