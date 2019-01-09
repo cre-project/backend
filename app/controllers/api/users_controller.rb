@@ -19,7 +19,6 @@ module Api
 
         @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id)
         @user.company = Company.create(name: company_name)
-
       else
         logger.error "Customer cannot be created: #{params.inspect} (#{params.class.name})"
       end
