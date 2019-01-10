@@ -3,21 +3,38 @@ module Api
     before_action :set_property_unit, only: [:show, :update, :destroy]
 
     def index
-      render json: PropertyUnit.all
+      if @current_user.present?
+        @property = @current_user.properties.find_by(id: params[:property_id])
+        render json: PropertyUnit.where(property_id: @property.id)
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @property_unit = PropertyUnit.new(property_unit_params)
+      if @current_user.present?
+        @property = @current_user.properties.find_by(id: params[:property_id])
+        @property_unit = @property.property_units.build(property_unit_params)
 
-      if @property_unit.save
-        render json: @property_unit, status: :created
+        if @property.save && @property_unit.save
+          render json: @property_unit, status: :created
+        else
+          render json: @property_unit.errors, status: :unprocessable_entity
+        end
       else
-        render json: @property_unit.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @property_unit.destroy
+      @property = @current_user.properties.find_by(id: params[:property_id])
+      @property_unit = @property.property_units.build(property_unit_params)
+
+      if @current_user.present? && @property.user_id == @current_user.id
+        @property_unit.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private
@@ -26,7 +43,7 @@ module Api
       end
 
       def property_unit_params
-        params.require(:property_unit).permit(:bedrooms, :bathrooms, :current_rent, :potential_rent, :property_id)
+        params.require(:property_unit).permit(:bedrooms, :bathrooms, :current_rent, :potential_rent)
       end
   end
 end
