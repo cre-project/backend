@@ -58,7 +58,7 @@ module Api
       end
 
       def package_params
-        params.require(:package).permit(:template, :property_id, :image_urls)
+        params.require(:package).permit(:template, :image_urls)
       end
   end
 end
