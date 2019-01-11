@@ -3,33 +3,53 @@ module Api
     before_action :set_rented_unit, only: [:show, :update, :destroy]
 
     def index
-      render json: RentedUnit.all
+      if @current_user.present?
+        render json: RentedUnit.where(user_id: @current_user.id)
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def show
-      render json: @rented_unit
+      if @current_user.present? && @rented_unit.user_id == @current_user.id
+        render json: @rented_unit
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @rented_unit = RentedUnit.new(rented_unit_params)
+      if @current_user.present?
+        @rented_unit = @current_user.rented_units.build(rented_unit_params)
 
-      if @rented_unit.save
-        render json: @rented_unit, status: :created
+        if @rented_unit.save
+          render json: @rented_unit, status: :created
+        else
+          render json: @rented_unit.errors, status: :unprocessable_entity
+        end
       else
-        render json: @rented_unit.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def update
-      if @rented_unit.update(rented_unit_params)
-        render json: @rented_unit, status: :ok
+      if @current_user.present? && @rented_unit.user_id == @current_user.id
+        if @rented_unit.update(rented_unit_params)
+          render json: @rented_unit, status: :ok
+        else
+          render json: @rented_unit.errors, status: :unprocessable_entity
+        end
       else
-        render json: @rented_unit.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @rented_unit.destroy
+      if @current_user.present? && @rented_unit.user_id == @current_user.id
+        @rented_unit.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private
