@@ -3,46 +3,76 @@ module Api
     before_action :set_operating_statement_field, only: [:show, :update, :destroy]
 
     def index
-      render json: OperatingStatementField.all.order('created_at DESC')
+      if @current_user.present?
+        @package = @current_user.packages.find_by(id: params[:package_id])
+        @operating_statement = @package.operating_statements.find_by(id: params[:operating_statement_id])
+        render json: OperatingStatementField.where(operating_statement_id: @operating_statement.id)
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def show
-      render json: @operating_statement_field
+      @package = @current_user.packages.find_by(id: params[:package_id])
+      @operating_statement = @package.operating_statements.find_by(id: params[:operating_statement_id])
+      if @current_user.present? && @package.user_id == @current_user.id
+        render json: @operating_statement_field
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @operating_statement_field = OperatingStatementField.new(operating_statement_field_params)
+      if @current_user.present?
+        @package = @current_user.packages.find_by(id: params[:package_id])
+        @operating_statement = @package.operating_statements.find_by(id: params[:operating_statement_id])
+        @operating_statement_field = @operating_statement.operating_statement_fields.build(operating_statement_field_params)
 
-      if @operating_statement_field.save
-        render json: @operating_statement_field, status: :created
-      else
-        render json: @operating_statement_field.errors, status: :unprocessable_entity
+        if @operating_statement_field.save
+          render json: @operating_statement_field, status: :created
+        else
+          render json: @operating_statement_field.errors, status: :unprocessable_entity
+        end
       end
     end
 
     def update
-      if @operating_statement_field.update(edit_params)
-        render json: @operating_statement_field, status: :ok
+      @package = @current_user.packages.find_by(id: params[:package_id])
+      @operating_statement = @package.operating_statements.find_by(id: params[:operating_statement_id])
+
+      if @current_user.present? && @package.user_id == @current_user.id
+        if @operating_statement_field.update(operating_statement_field_params)
+          render json: @operating_statement_field, status: :ok
+        else
+          render json: @operating_statement_field.errors, status: :unprocessable_entity
+        end
       else
-        render json: @operating_statement_field.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @operating_statement_field.destroy
+      @package = @current_user.packages.find_by(id: params[:package_id])
+      @operating_statement = @package.operating_statements.find_by(id: params[:operating_statement_id])
+
+      if @current_user.present? && @package.user_id == @current_user.id
+        @operating_statement_field.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private
-      def set_operating_statement_field
-        @operating_statement_field = OperatingStatementField.find(params[:id])
-      end
+    def set_operating_statement_field
+      @operating_statement_field = OperatingStatementField.find(params[:id])
+    end
 
-      def operating_statement_field_params
-        params.require(:operating_statement_field).permit(:name, :current_value, :potential_value, :is_income, :operating_statement_id)
-      end
+    def operating_statement_field_params
+      params.require(:operating_statement_field).permit(:name, :current_value, :potential_value, :is_income, :operating_statement_id)
+    end
 
-      def edit_params
-        params.require(:operating_statement_field).permit(:name, :current_value, :potential_value)
-      end
+    def edit_params
+      params.require(:operating_statement_field).permit(:name, :current_value, :potential_value)
+    end
   end
 end
