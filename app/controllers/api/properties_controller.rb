@@ -58,7 +58,7 @@ module Api
     end
 
     def property_params
-      params.require(:property).permit(:name, :year_built, :number_of_stories, :lot_size, :apn, :price, :total_square_feet)
+      params.require(:property).permit(:name, :year_built, :number_of_stories, :lot_size, :apn, :price, :total_square_feet, :package_id)
     end
   end
 end

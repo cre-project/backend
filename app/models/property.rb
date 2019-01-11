@@ -1,5 +1,6 @@
 class Property < ApplicationRecord
   belongs_to :user
+  belongs_to :package
   has_many :property_units
 
   validates :price, presence: true

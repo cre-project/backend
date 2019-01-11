@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_153420) do
+ActiveRecord::Schema.define(version: 2019_01_11_160350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -77,10 +77,8 @@ ActiveRecord::Schema.define(version: 2019_01_11_153420) do
     t.string "template", default: "default"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "property_id"
     t.uuid "user_id"
     t.string "image_urls", default: [], array: true
-    t.index ["property_id"], name: "index_packages_on_property_id"
     t.index ["user_id"], name: "index_packages_on_user_id"
   end
 
@@ -167,7 +165,6 @@ ActiveRecord::Schema.define(version: 2019_01_11_153420) do
   add_foreign_key "package_rented_units", "rented_units"
   add_foreign_key "package_sold_properties", "packages"
   add_foreign_key "package_sold_properties", "sold_properties"
-  add_foreign_key "packages", "properties"
   add_foreign_key "packages", "users"
   add_foreign_key "properties", "packages"
   add_foreign_key "properties", "users"
