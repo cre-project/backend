@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_132746) do
+ActiveRecord::Schema.define(version: 2019_01_10_163501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 2019_01_10_132746) do
   create_table "operating_statements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "package_id"
+    t.index ["package_id"], name: "index_operating_statements_on_package_id"
   end
 
   create_table "package_rented_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -166,6 +168,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_132746) do
 
   add_foreign_key "companies", "addresses"
   add_foreign_key "operating_statement_fields", "operating_statements"
+  add_foreign_key "operating_statements", "packages"
   add_foreign_key "package_rented_units", "packages"
   add_foreign_key "package_rented_units", "rented_units"
   add_foreign_key "package_sold_properties", "packages"

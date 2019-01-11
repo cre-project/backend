@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   get "/healthcheck", to: proc { [200, {}, ["OK"]] }
   namespace 'api' do
-    resources :operating_statement_fields
-    resources :operating_statements
     resources :users do
       resources :companies
     end
-    resources :packages
+    resources :packages do
+      resources :operating_statements do
+        resources :operating_statement_fields
+      end
+    end
     resources :sold_properties
     resources :rented_units
     resources :properties do

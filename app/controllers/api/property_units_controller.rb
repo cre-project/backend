@@ -28,7 +28,6 @@ module Api
 
     def destroy
       @property = @current_user.properties.find_by(id: params[:property_id])
-      @property_unit = @property.property_units.build(property_unit_params)
 
       if @current_user.present? && @property.user_id == @current_user.id
         @property_unit.destroy

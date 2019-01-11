@@ -3,33 +3,60 @@ module Api
     before_action :set_operating_statement, only: [:show, :update, :destroy]
 
     def index
-      render json: OperatingStatement.all.order('created_at DESC')
+      if @current_user.present?
+        @package = @current_user.packages.find_by(id: params[:package_id])
+        render json: OperatingStatement.where(package_id: @package.id)
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def show
-      render json: @operating_statement
+      @package = @current_user.packages.find_by(id: params[:package_id])
+      if @current_user.present? && @package.user_id == @current_user.id
+        render json: @operating_statement
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @operating_statement = OperatingStatement.new(operating_statement_params)
+      if @current_user.present?
+        @package = @current_user.packages.find_by(id: params[:package_id])
+        @operating_statement = @package.operating_statements.build(operating_statement_params)
 
-      if @operating_statement.save
-        render json: @operating_statement, status: :created
+        if @package.save && @operating_statement.save
+          render json: @operating_statement, status: :created
+        else
+          render json: @operating_statement.errors, status: :unprocessable_entity
+        end
       else
-        render json: @operating_statement.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def update
-      if @operating_statement.update(operating_statement_params)
-        render json: @operating_statement, status: :ok
+      @package = @current_user.packages.find_by(id: params[:package_id])
+
+      if @current_user.present? && @package.user_id == @current_user.id
+        if @operating_statement.update(operating_statement_params)
+          render json: @operating_statement, status: :ok
+        else
+          render json: @operating_statement.errors, status: :unprocessable_entity
+        end
       else
-        render json: @operating_statement.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @operating_statement.destroy
+      @package = @current_user.packages.find_by(id: params[:package_id])
+
+      if @current_user.present? && @package.user_id == @current_user.id
+        @operating_statement.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private
