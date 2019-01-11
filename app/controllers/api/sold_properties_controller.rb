@@ -3,33 +3,53 @@ module Api
     before_action :set_sold_property, only: [:show, :update, :destroy]
 
     def index
-      render json: SoldProperty.all
+      if @current_user.present?
+        render json: SoldProperty.where(user_id: @current_user.id)
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def show
-      render json: @sold_property
+      if @current_user.present? && @sold_property.user_id == @current_user.id
+        render json: @sold_property
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @sold_property = SoldProperty.new(sold_property_params)
+      if @current_user.present?
+        @sold_property = @current_user.sold_properties.build(sold_property_params)
 
-      if @sold_property.save
-        render json: @sold_property, status: :created
+        if @sold_property.save
+          render json: @sold_property, status: :created
+        else
+          render json: @sold_property.errors, status: :unprocessable_entity
+        end
       else
-        render json: @sold_property.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def update
-      if @sold_property.update(sold_property_params)
-        render json: @sold_property, status: :ok
+      if @sold_property.present? && @sold_property.user_id == @current_user.id
+        if @sold_property.update(sold_property_params)
+          render json: @sold_property, status: :ok
+        else
+          render json: @sold_property.errors, status: :unprocessable_entity
+        end
       else
-        render json: @sold_property.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @sold_property.destroy
+      if @current_user.present? && @sold_property.user_id == @current_user.id
+        @sold_property.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private
