@@ -1,37 +1,55 @@
-# To be deleted, as address will be edited through other objects (e.g. property)
-
 module Api
   class AddressesController < ApplicationController
     before_action :set_address, only: [:show, :update, :destroy]
 
     def index
-      render json: Address.all.order('created_at DESC')
+      if @current_user.present?
+        render json: Address.where(user_id: @current_user.id)
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def show
-      render json: @address
+      if @current_user.present? && @address.user_id == @current_user.id
+        render json: @address
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @address = Address.new(address_params)
+      if @current_user.present?
+        @address = @current_user.addresses.build(address_params)
 
-      if @address.save
-        render json: @address, status: :created
+        if @address.save
+          render json: @address, status: :created
+        else
+          render json: @address.errors, status: :unprocessable_entity
+        end
       else
-        render json: @address.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def update
-      if @address.update(address_params)
-        render json: @address
+      if @current_user.present? && @address.user_id == @current_user.id
+        if @address.update(address_params)
+          render json: @address, status: :ok
+        else
+          render json: @address.errors, status: :unprocessable_entity
+        end
       else
-        render json: @address.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @address.destroy
+      if @current_user.present? && @address.user_id == @current_user.id
+        @address.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private

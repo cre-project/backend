@@ -21,7 +21,6 @@ module Api
     def create
       if @current_user.present?
         @property = @current_user.properties.build(property_params)
-        # @property.address = Address.create(address_params)
 
         if @property.save
           render json: @property, status: :created
@@ -54,16 +53,12 @@ module Api
     end
 
     private
-      def set_property
-        @property = Property.find(params[:id])
-      end
+    def set_property
+      @property = Property.find(params[:id])
+    end
 
-      def property_params
-        params.require(:property).permit(:name, :year_built, :number_of_stories, :lot_size, :apn, :price, :total_square_feet)
-      end
-
-      # def address_params
-      #   params.require(:property).require(:address).permit(:street, :city, :zip, :state)
-      # end
+    def property_params
+      params.require(:property).permit(:name, :year_built, :number_of_stories, :lot_size, :apn, :price, :total_square_feet)
+    end
   end
 end

@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :properties
   has_many :sold_properties
   has_many :rented_units
+  has_many :addresses, dependent: :destroy
   has_one :company
   accepts_nested_attributes_for :company, allow_destroy: true
 

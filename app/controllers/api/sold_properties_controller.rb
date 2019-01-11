@@ -58,7 +58,7 @@ module Api
       end
 
       def sold_property_params
-        params.require(:sold_property).permit(:year_built, :sales_price, :num_units, :square_feet, :cap_rate, :grm, :close_of_escrow, :image_url, :user_id, :address_id)
+        params.require(:sold_property).permit(:year_built, :sales_price, :num_units, :square_feet, :cap_rate, :grm, :close_of_escrow, :image_url)
       end
   end
 end

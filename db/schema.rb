@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_163501) do
+ActiveRecord::Schema.define(version: 2019_01_11_153420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2019_01_10_163501) do
     t.integer "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -31,9 +33,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_163501) do
     t.string "logo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "address_id"
     t.uuid "user_id"
-    t.index ["address_id"], name: "index_companies_on_address_id"
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
@@ -96,8 +96,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_163501) do
     t.datetime "updated_at", null: false
     t.uuid "package_id"
     t.uuid "user_id"
-    t.uuid "address_id"
-    t.index ["address_id"], name: "index_properties_on_address_id"
     t.index ["package_id"], name: "index_properties_on_package_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
@@ -122,8 +120,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_163501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
-    t.uuid "address_id"
-    t.index ["address_id"], name: "index_rented_units_on_address_id"
     t.index ["user_id"], name: "index_rented_units_on_user_id"
   end
 
@@ -139,8 +135,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_163501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
-    t.uuid "address_id"
-    t.index ["address_id"], name: "index_sold_properties_on_address_id"
     t.index ["user_id"], name: "index_sold_properties_on_user_id"
   end
 
@@ -166,7 +160,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_163501) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "companies", "addresses"
+  add_foreign_key "addresses", "users"
   add_foreign_key "operating_statement_fields", "operating_statements"
   add_foreign_key "operating_statements", "packages"
   add_foreign_key "package_rented_units", "packages"
@@ -175,13 +169,10 @@ ActiveRecord::Schema.define(version: 2019_01_10_163501) do
   add_foreign_key "package_sold_properties", "sold_properties"
   add_foreign_key "packages", "properties"
   add_foreign_key "packages", "users"
-  add_foreign_key "properties", "addresses"
   add_foreign_key "properties", "packages"
   add_foreign_key "properties", "users"
   add_foreign_key "property_units", "properties"
-  add_foreign_key "rented_units", "addresses"
   add_foreign_key "rented_units", "users"
-  add_foreign_key "sold_properties", "addresses"
   add_foreign_key "sold_properties", "users"
   add_foreign_key "users", "companies"
 end
