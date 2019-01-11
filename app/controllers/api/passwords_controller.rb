@@ -6,7 +6,8 @@ module Api
 
     def request_reset
       if params[:email].blank?
-        return render json: {error: 'Email not present'}
+        logger.error "Email not present"
+        render body: nil, status: :ok
       end
 
       user = User.find_by(email: params[:email].downcase)
@@ -16,7 +17,8 @@ module Api
         ::PasswordResetMailer.with(user: user).reset_password_email.deliver_now
         render json: {status: 'ok'}, status: :ok
       else
-        render json: {error: ['Email address not found. Please check and try again.']}, status: :not_found
+        logger.error "Email address not found."
+        render body: nil, status: :ok
       end
     end
 
@@ -33,10 +35,12 @@ module Api
         if user.reset_password!(params[:password])
           render json: {status: 'ok'}, status: :ok
         else
-          render json: {error: user.errors.full_messages}, status: :unprocessable_entity
+          logger.error "Error. Could not reset password."
+          render body: nil, status: :ok
         end
       else
-        render json: {error:  ['Link not valid or expired. Try generating a new link.']}, status: :not_found
+        logger.error "Link not valid or expired. Try generating a new link."
+        render body: nil, status: :ok
       end
     end
   end
