@@ -8,7 +8,6 @@ module Api
     end
 
     def create
-      # logger.error "#{params["data"]}"
       data_params = params["data"].present? ? get_data_params : {}
       if params["data"].present? && data_params["id"].present? && data_params["company_name"].present? && data_params["first_name"].present? && data_params["last_name"].present? && data_params["email_id"].present?
         email = data_params["email_id"]
@@ -46,6 +45,7 @@ module Api
     end
 
     def pabbly_redirect
+      logger.error "Customer cannot be created: #{params}"
       pabbly_customer_id = params[:customer_id]
       auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
       pabbly_response = HTTParty.post('https://payments.pabbly.com/api/v1/portal_sessions/', basic_auth: auth, body: { customer_id: pabbly_customer_id })
