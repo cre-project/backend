@@ -7,7 +7,7 @@ module Api
     user = User.find_by(email: params[:email])
 
     if command.success?
-      render json: { auth_token: command.result, user: user.as_json(except: [:password_digest, :reset_password_token, :reset_password_sent_at]) }
+      render json: { auth_token: command.result, user: user.as_json(except: [:password_digest, :reset_password_token, :reset_password_sent_at]), company: user.company.as_json }
     else
       render json: { error: command.errors }, status: :unauthorized
     end
