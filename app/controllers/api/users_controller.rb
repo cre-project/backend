@@ -50,7 +50,7 @@ module Api
         pabbly_customer_id = params[:customer_id]
         auth = { username: ENV["PABBLY_API_KEY"], password: ENV["PABBLY_SECRET_KEY"] }
         pabbly_response = HTTParty.post('https://payments.pabbly.com/api/v1/portal_sessions/', basic_auth: auth, body: { customer_id: pabbly_customer_id })
-        logger.error "Incoming Params: #{pabbly_response[params]}"
+        logger.error "Incoming Params: #{pabbly_response["params"]}"
         if pabbly_response["status"] == "success"
           customer_portal_url = pabbly_response["data"]["access_url"]
           render json: { customer_portal_url: customer_portal_url }, status: :ok
