@@ -57,7 +57,7 @@ class CreateUserTest < ActionDispatch::IntegrationTest
 
     it "creates user" do
       post "/api/users", params: request_body, headers: { 'CONTENT_TYPE' => 'application/json' }
-      assert_equal 201, status
+      assert_equal 200, status
     end
   end
 end
