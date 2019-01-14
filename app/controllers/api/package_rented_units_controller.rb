@@ -14,7 +14,6 @@ module Api
 
     def create
       if @current_user.present?
-        binding.pry
         @package = @current_user.packages.find_by(id: package_rented_unit_params[:package_id])
         @rented_unit = @current_user.rented_units.find_by(id: package_rented_unit_params[:rented_unit_id])
         @package_rented_unit = @package.package_rented_units.build(package_rented_unit_params)

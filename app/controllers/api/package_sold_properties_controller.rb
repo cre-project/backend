@@ -2,34 +2,56 @@ module Api
   class PackageSoldPropertiesController < ApplicationController
     before_action :set_package_sold_property, only: [:show, :update, :destroy]
 
-    def index
-      render json: PackageSoldProperty.all.order('created_at DESC')
-    end
-
     def show
-      render json: @package_sold_property
+      @package = @current_user.packages.find_by(id: package_sold_property_params[:package_id])
+      @sold_property = @current_user.sold_properties.find_by(id: package_sold_property_params[:sold_property_id])
+      if @current_user.present? && @package.user_id == @current_user.id && @sold_property.user_id == @current_user.id
+        render json: @package_sold_property
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     def create
-      @package_sold_property = PackageSoldProperty.new(package_sold_property_params)
+      if @current_user.present?
+        @package = @current_user.packages.find_by(id: package_sold_property_params[:package_id])
+        @sold_property = @current_user.sold_properties.find_by(id: package_sold_property_params[:sold_property_id])
+        @package_sold_property = @package.package_sold_properties.build(package_sold_property_params)
 
-      if @package_sold_property.save
-        render json: @package_sold_property, status: :created
+        if @package_sold_property.save
+          render json: @package_sold_property, status: :created
+        else
+          render json: @package_sold_property.errors, status: :unprocessable_entity
+        end
       else
-        render json: @package_sold_property.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def update
-      if @package_sold_property.update(package_sold_property_params)
-        render json: @package_sold_property, status: :ok
+      @package = @current_user.packages.find_by(id: package_sold_property_params[:package_id])
+      @sold_property = @current_user.sold_properties.find_by(id: package_sold_property_params[:sold_property_id])
+
+      if @current_user.present? && @package.user_id == @current_user.id && @sold_property.user_id == @current_user.id
+        if @package_sold_property.update(package_sold_property_params)
+          render json: @package_sold_property, status: :ok
+        else
+          render json: @package_sold_property.errors, status: :unprocessable_entity
+        end
       else
-        render json: @package_sold_property.errors, status: :unprocessable_entity
+        render body: nil, status: :forbidden
       end
     end
 
     def destroy
-      @package_sold_property.destroy
+      @package = @current_user.packages.find_by(id: package_sold_property_params[:package_id])
+      @sold_property = @current_user.sold_properties.find_by(id: package_sold_property_params[:sold_property_id])
+
+      if @current_user.present? && @package.user_id == @current_user.id && @sold_property.user_id == @current_user.id
+        @package_sold_property.destroy
+      else
+        render body: nil, status: :forbidden
+      end
     end
 
     private
