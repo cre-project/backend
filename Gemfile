@@ -39,7 +39,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'pry-rails'
   gem 'webmock', '~> 2.1'
-  gem 'factory_bot', '~> 4.8', '>= 4.8.2'
+  gem 'factory_bot_rails'
 end
 
 group :development do
