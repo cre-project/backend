@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     post 'authenticate', to: '/api/authentication#authenticate'
     post 'passwords/request_reset', to: 'passwords#request_reset'
     post 'passwords/reset', to: 'passwords#reset'
-    post 'user/customer_portal_url', to: 'users#pabbly_redirect'
+    get 'user/customer_portal_url', to: 'users#pabbly_redirect'
   end
 end
