@@ -2,16 +2,6 @@ module Api
   class PackageRentedUnitsController < ApplicationController
     before_action :set_package_rented_unit, only: [:show, :update, :destroy]
 
-    def index
-      if @current_user.present?
-        @package = @current_user.packages.find_by(id: package_rented_unit_params[:package_id])
-        @rented_unit = @current_user.rented_units.find_by(id: package_rented_unit_params[:rented_unit_id])
-        render json: PackageRentedUnit.where(package_id: @package.id, rented_unit_id: @rented_unit.id)
-      else
-        render body: nil, status: :forbidden
-      end
-    end
-
     def show
       @package = @current_user.packages.find_by(id: package_rented_unit_params[:package_id])
       @rented_unit = @current_user.rented_units.find_by(id: package_rented_unit_params[:rented_unit_id])
@@ -24,10 +14,10 @@ module Api
 
     def create
       if @current_user.present?
+        binding.pry
         @package = @current_user.packages.find_by(id: package_rented_unit_params[:package_id])
         @rented_unit = @current_user.rented_units.find_by(id: package_rented_unit_params[:rented_unit_id])
         @package_rented_unit = @package.package_rented_units.build(package_rented_unit_params)
-        @package_rented_unit = @rented_unit.package_rented_units.build(package_rented_unit_params)
 
         if @package_rented_unit.save
           render json: @package_rented_unit, status: :created
