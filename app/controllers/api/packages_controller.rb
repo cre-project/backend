@@ -12,7 +12,7 @@ module Api
 
     def show
       if @current_user.present? && @package.user_id == @current_user.id
-        render json: @package
+        render json: { package: @package, property: @package.property, property_units: @package.property.property_units, package_sold_properties: @package.package_sold_properties, package_rented_units: @package.package_rented_units, operating_statement: @package.operating_statements, addresses: @current_user.addresses, user: @current_user, company: @current_user.company }
       else
         render body: nil, status: :forbidden
       end
