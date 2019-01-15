@@ -1,6 +1,7 @@
 module Api
   class PackagesController < ApplicationController
     before_action :set_package, only: [:show, :update, :destroy]
+    skip_before_action :authenticate_request
 
     def index
       if @current_user.present?
@@ -10,12 +11,31 @@ module Api
       end
     end
 
+    # def show
+    #   if @current_user.present? && @package.user_id == @current_user.id
+    #     render json: { package: @package }
+    #   else
+    #     render body: nil, status: :forbidden
+    #   end
+    # end
+
     def show
-      if @current_user.present? && @package.user_id == @current_user.id
-        render json: { package: @package, property: @package.property, property_units: @package.property.property_units, package_sold_properties: @package.package_sold_properties, package_rented_units: @package.package_rented_units, operating_statement: @package.operating_statements, addresses: @current_user.addresses, user: @current_user, company: @current_user.company }
-      else
-        render body: nil, status: :forbidden
-      end
+      render json:
+      {
+        package: {
+          package: @package,
+          property: @package.property,
+          property_units: @package.property.property_units,
+          package_sold_properties: @package.package_sold_properties,
+          package_rented_units: @package.package_rented_units,
+          operating_statement: @package.operating_statements
+        },
+        user: {
+          user: @package.user,
+          company: @package.user.company,
+          addresses: @package.user.addresses
+        }
+      }
     end
 
     def create
