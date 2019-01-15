@@ -9,7 +9,7 @@ module Api
 
     def create
       data_params = params["data"].present? ? get_data_params : {}
-      if params["data"].present? && data_params["id"].present? && data_params["company_name"].present? && data_params["first_name"].present? && data_params["last_name"].present? && data_params["email_id"].present?
+      if params["data"].present? && data_params["id"].present? && data_params["first_name"].present? && data_params["last_name"].present? && data_params["email_id"].present?
         email = data_params["email_id"]
         first_name = data_params["first_name"]
         last_name = data_params["last_name"]
