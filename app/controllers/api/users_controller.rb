@@ -14,10 +14,12 @@ module Api
         first_name = data_params["first_name"]
         last_name = data_params["last_name"]
         pabbly_customer_id = data_params["id"]
-        company_name = data_params["company_name"]
 
         @user = User.create(email: email, first_name: first_name, last_name: last_name, pabbly_customer_id: pabbly_customer_id)
-        @user.company = Company.create(name: company_name)
+        
+        # company name is not always present => optionally create a company for the user
+        if data_params["company_name"].present?
+          @user.company = Company.create(name: data_params["company_name"])
       else
         logger.error "Customer cannot be created: #{params.inspect} (#{params.class.name})"
       end
