@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     post 'passwords/request_reset', to: 'passwords#request_reset'
     post 'passwords/reset', to: 'passwords#reset'
     get 'user/customer_portal_url', to: 'users#pabbly_redirect'
+    post 'user/activate', to: 'users#activate'
   end
 end

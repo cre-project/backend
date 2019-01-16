@@ -1,7 +1,7 @@
 module Api
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
-    skip_before_action :authenticate_request, only: [:create]
+    skip_before_action :authenticate_request, only: [:create, :activate]
 
     def show
       render json: @user
@@ -45,6 +45,33 @@ module Api
       render status: 501, json: {
         message: "Not implemented"
       }.to_json
+    end
+
+    def activate
+      token = params[:token].to_s
+      errmsg = "Activation token not valid or missing"
+
+      if params[:token].blank?
+        return render json: {error: errmsg}
+      end
+      
+      if params[:password].blank?
+        return render json: {error: "Password is required"}, status: :unprocessable_entity
+      end
+
+      # only activate inactive users (ie those with an empty password)
+      user = User.find_by(pabbly_customer_id: token, password_digest: nil)
+
+      if user.present?
+        if user.reset_password!(params[:password])
+          render json: {status: 'ok'}, status: :ok
+        else
+          logger.error "Could not activate user account: password could not be set"
+          render body: nil, status: :internal_server_error
+        end
+      else
+        render json: {error: errmsg}, status: :unprocessable_entity
+      end
     end
 
     def pabbly_redirect
