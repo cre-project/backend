@@ -1,6 +1,7 @@
 module Api
   class PackagesController < ApplicationController
     before_action :set_package, only: [:show, :update, :destroy, :full_package]
+    before_action :authenticate_from_pdf_app, only: [:full_package]
     skip_before_action :authenticate_request, only: [:full_package]
 
     def index
