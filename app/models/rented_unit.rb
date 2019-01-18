@@ -9,7 +9,7 @@ class RentedUnit < ApplicationRecord
   validates_numericality_of :current_rent, greater_than: 0.0
 
   validates :bedrooms, inclusion: { in: 0..4 }
-  validates :bathrooms, inclusion: { in: [1, 1.5, 2, 2.5, 3] }
+  validates :bathrooms, inclusion: { in: [1, 1.5, 2, 2.5, 3] }, allow_nil: true
 
-  validates :year_built, inclusion: { in: 1500..2050 }
+  validates :year_built, inclusion: { in: 1500..2050 }, allow_nil: true
 end
