@@ -16,6 +16,7 @@
 * `SECRET_KEY_BASE`
 * `PABBLY_API_KEY`
 * `PABBLY_SECRET_KEY`
+* `BACKEND_API_KEY`
 
 ## Endpoints
 
