@@ -1,7 +1,7 @@
 module Api
   class PackagesController < ApplicationController
-    before_action :set_package, only: [:show, :update, :destroy]
-    skip_before_action :authenticate_request
+    before_action :set_package, only: [:show, :update, :destroy, :full_package]
+    skip_before_action :authenticate_request, only: [:full_package]
 
     def index
       if @current_user.present?
@@ -11,21 +11,21 @@ module Api
       end
     end
 
-    # def show
-    #   if @current_user.present? && @package.user_id == @current_user.id
-    #     render json: { package: @package }
-    #   else
-    #     render body: nil, status: :forbidden
-    #   end
-    # end
-
     def show
+      if @current_user.present? && @package.user_id == @current_user.id
+        render json: { package: @package }
+      else
+        render body: nil, status: :forbidden
+      end
+    end
+
+    def full_package
       render json:
       {
         package: {
           package: @package,
           property: @package.property,
-          property_units: @package.property.property_units,
+          property_units: property_units,
           package_sold_properties: @package.package_sold_properties,
           package_rented_units: @package.package_rented_units,
           operating_statement: @package.operating_statements
@@ -79,6 +79,10 @@ module Api
 
       def package_params
         params.require(:package).permit(:template, :image_urls)
+      end
+
+      def property_units
+        @package.property.present? ? @package.property.property_units : []
       end
   end
 end

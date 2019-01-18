@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       resources :operating_statements do
         resources :operating_statement_fields
       end
+      member do
+        get 'full_package'
+      end
     end
     resources :sold_properties
     resources :rented_units
