@@ -17,7 +17,7 @@
 * `PABBLY_API_KEY`
 * `PABBLY_SECRET_KEY`
 * `PDF_APP_API_KEY`
-* master key is required, stored in `config/master.key`
+* `MASTER_KEY` (stored in `config/master.key`)
 
 ## Endpoints
 
@@ -77,9 +77,16 @@
 * Update: PUT `api/operating_statements/:id/operating_statement_fields/:id`
 * Destroy: DELETE `api/operating_statements/:id/operating_statement_fields/:id`
 
+### Package Sold Property
+* Index: GET `/api/packages/:id/package_sold_properties` 
+* Create: POST `api/packages/:id/package_sold_properties` (required: `sold_property_id`)
+* Delete: DELETE `api/packages/:id/package_sold_properties/:id`
+
+### Package Rented Unit
+* Index: GET `/api/packages/:id/package_rented_units` 
+* Create: POST `api/packages/:id/package_rented_units` (required: `rented_unit_id`)
+* Delete: DELETE `api/packages/:id/package_rented_units/:id`
+
 ### To be added when completed
 * Address for some models
-* Package sold property
-* Package rented unit
-
 
