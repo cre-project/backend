@@ -27,10 +27,9 @@ module Api
     end
 
     def destroy
-      @package = @current_user.packages.find_by(id: package_sold_property_params[:package_id])
-      @sold_property = @current_user.sold_properties.find_by(id: package_sold_property_params[:sold_property_id])
+      @package = @current_user.packages.find_by(id: params[:package_id])
 
-      if @current_user.present? && @package.user_id == @current_user.id && @sold_property.user_id == @current_user.id
+      if @current_user.present? && @package.user_id == @current_user.id
         @package_sold_property.destroy
       else
         render body: nil, status: :forbidden
