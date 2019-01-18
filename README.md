@@ -68,7 +68,7 @@
 * Update: PUT `api/operating_statements/:id`
 * Destroy: DELETE `api/operating_statements/:id`
 
-## Operating Statement Field
+### Operating Statement Field
 * Index: GET `/api/operating_statements/:id/operating_statement_fields` 
 * Show: GET `/api/operating_statements/:id/operating_statement_fields/:id`
 * Create: POST `api/operating_statements/:id/operating_statement_fields`
