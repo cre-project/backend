@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       member do
         get 'full_package'
       end
+      resources :package_sold_properties
+      resources :package_rented_units
     end
     resources :sold_properties
     resources :rented_units
@@ -18,8 +20,6 @@ Rails.application.routes.draw do
       resources :property_units
     end
     resources :addresses
-    resources :package_sold_properties
-    resources :package_rented_units
     post 'authenticate', to: '/api/authentication#authenticate'
     post 'passwords/request_reset', to: 'passwords#request_reset'
     post 'passwords/reset', to: 'passwords#reset'
