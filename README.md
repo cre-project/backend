@@ -17,6 +17,7 @@
 * `PABBLY_API_KEY`
 * `PABBLY_SECRET_KEY`
 * `PDF_APP_API_KEY`
+* master key is required, stored in `config/master.key`
 
 ## Endpoints
 
