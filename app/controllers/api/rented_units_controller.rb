@@ -21,6 +21,7 @@ module Api
     def create
       if @current_user.present?
         @rented_unit = @current_user.rented_units.build(rented_unit_params)
+        @rented_unit.address = Address.create(address_params)
 
         if @rented_unit.save
           render json: @rented_unit, status: :created
@@ -58,7 +59,11 @@ module Api
       end
 
       def rented_unit_params
-        params.require(:rented_unit).permit(:year_built, :bedrooms, :bathrooms, :current_rent, :image_url)
+        params.require(:rented_unit).permit(:year_built, :bedrooms, :bathrooms, :current_rent, :image_url, address_attributes: [ :street, :city, :state, :zip ])
+      end
+
+      def address_params
+        params.require(:rented_unit).require(:address).permit(:street, :city, :state, :zip)
       end
   end
 end
