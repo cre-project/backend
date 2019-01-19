@@ -29,6 +29,10 @@
 * Update: PUT `api/users/:id`
 * Pabbly redirect: GET `user/customer_portal_url` (required: `customer_id)
 
+#### Company
+Company is created with the user:
+`{ user: { email: "donald.duck@gmail.com", first_name: "Donald", last_name: "Duck", company: { name: "Donald Inc." } } }`
+
 ### Package
 * Index: GET `/api/packages` 
 * Show: GET `/api/packages/:id`
@@ -44,6 +48,10 @@
 * Update: PUT `api/properties/:id`
 * Destroy: DELETE `api/properties/:id`
 
+#### Address
+Address is created with the property:
+`{ property: { price: 200000, address: { street: "Pennsylvania Avenue", city: "Washington", state: "DC", zip: 19999 } } }`
+
 ### Property Unit
 * Index: GET `/api/properties/:id/property_units` 
 * Create: POST `api/properties/:id/property_units` (required: `bedrooms`, `bathrooms`, `current_rent`)
@@ -56,12 +64,20 @@
 * Update: PUT `api/sold_properties/:id`
 * Destroy: DELETE `api/sold_properties/:id`
 
+#### Address
+Address is created with the sold property:
+`{ sold_property: { year_built: 2000, address: { street: "Pennsylvania Avenue", city: "Washington", state: "DC", zip: 19999 } } }`
+
 ### Rented Unit
 * Index: GET `/api/rented_units` 
 * Show: GET `/api/rented_units/:id`
 * Create: POST `api/rented_units` (required: `bedrooms`, `current_rent`)
 * Update: PUT `api/rented_units/:id`
 * Destroy: DELETE `api/rented_units/:id`
+
+#### Address
+Address is created with the rented unit:
+`{ rented_unit: { year_built: 2000, bedrooms: 2, bathrooms: 2, current_rent: 1000, address: { street: "Pennsylvania Avenue", city: "Washington", state: "DC", zip: 19999 } } }`
 
 ### Operating Statement
 * Index: GET `/api/operating_statements` 
