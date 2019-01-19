@@ -1,4 +1,5 @@
 class Address < ApplicationRecord
+  belongs_to :addressable, polymorphic: true
+
   validates :street, :city, :state, :zip, presence: true
-  belongs_to :user, optional: true
 end
