@@ -102,7 +102,3 @@ Address is created with the rented unit:
 * Index: GET `/api/packages/:id/package_rented_units` 
 * Create: POST `api/packages/:id/package_rented_units` (required: `rented_unit_id`)
 * Delete: DELETE `api/packages/:id/package_rented_units/:id`
-
-### To be added when completed
-* Address for some models
-
