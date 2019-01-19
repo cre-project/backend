@@ -21,6 +21,7 @@ module Api
     def create
       if @current_user.present?
         @sold_property = @current_user.sold_properties.build(sold_property_params)
+        @sold_property.address = Address.create(address_params)
 
         if @sold_property.save
           render json: @sold_property, status: :created
@@ -58,7 +59,11 @@ module Api
       end
 
       def sold_property_params
-        params.require(:sold_property).permit(:year_built, :sales_price, :num_units, :square_feet, :cap_rate, :grm, :close_of_escrow, :image_url)
+        params.require(:sold_property).permit(:year_built, :sales_price, :num_units, :square_feet, :cap_rate, :grm, :close_of_escrow, :image_url, address_attributes: [ :street, :city, :state, :zip ])
+      end
+
+      def address_params
+        params.require(:sold_property).require(:address).permit(:street, :city, :state, :zip)
       end
   end
 end
