@@ -26,6 +26,7 @@ module Api
         package: {
           package: @package,
           property: @package.property,
+          property_address: @package.property.address.as_json( except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]),
           property_units: property_units,
           package_sold_properties: @package.package_sold_properties,
           package_rented_units: @package.package_rented_units,
