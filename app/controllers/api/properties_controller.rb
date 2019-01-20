@@ -4,7 +4,7 @@ module Api
 
     def index
       if @current_user.present?
-        render json: Property.where(user_id: @current_user.id)
+        render json: Property.where(user_id: @current_user.id).as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
       else
         render body: nil, status: :forbidden
       end
@@ -12,7 +12,7 @@ module Api
 
     def show
       if @current_user.present? && @property.user_id == @current_user.id
-        render json: @property
+        render json: @property.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
       else
         render body: nil, status: :forbidden
       end
@@ -36,7 +36,7 @@ module Api
     def update
       if @current_user.present? && @property.user_id == @current_user.id
         if @property.update(property_params)
-          render json: @property, status: :ok
+          render json: @property.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
         else
           render json: @property.errors, status: :unprocessable_entity
         end
