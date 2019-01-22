@@ -27,7 +27,7 @@
 ### User
 * Create: POST `api/users` (required: `email`)
 * Update: PUT `api/users/:id`
-* Pabbly redirect: GET `user/customer_portal_url` (required: `customer_id)
+* Pabbly redirect: GET `user/customer_portal_url` (required: `customer_id`)
 
 #### Company
 Company is created with the user:
