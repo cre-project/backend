@@ -26,6 +26,19 @@ module Api
       end
     end
 
+    def update
+      @property = @current_user.properties.find_by(id: params[:property_id])
+      if @current_user.present? && @property.user_id == @current_user.id
+        if @property_unit.update(property_unit_params)
+          render json: @property_unit, status: :ok
+        else
+          render json: @property_unit.errors, status: :unprocessable_entity
+        end
+      else
+        render body: nil, status: :forbidden
+      end
+    end
+
     def destroy
       @property = @current_user.properties.find_by(id: params[:property_id])
 
