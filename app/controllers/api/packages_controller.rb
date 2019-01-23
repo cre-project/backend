@@ -57,7 +57,7 @@ module Api
         @package_sold_properties.each do |psp|
           @sold_properties << SoldProperty.find(psp.sold_property_id)
         end
-        render json: @sold_properties
+        render json: @sold_properties.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
       end
     end
 
