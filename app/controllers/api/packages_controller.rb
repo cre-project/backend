@@ -1,8 +1,8 @@
 module Api
   class PackagesController < ApplicationController
-    before_action :set_package, only: [:show, :update, :destroy, :full_package]
-    before_action :authenticate_from_pdf_app, only: [:full_package]
-    skip_before_action :authenticate_request, only: [:full_package]
+    before_action :set_package, only: [:show, :update, :destroy, :full_package, :update_images]
+    before_action :authenticate_from_pdf_app, only: [:full_package, :update_images]
+    skip_before_action :authenticate_request, only: [:full_package, :update_images]
 
     def index
       if @current_user.present?
@@ -62,6 +62,17 @@ module Api
         end
       else
         render body: nil, status: :forbidden
+      end
+    end
+
+    def update_images
+      params["package"]["image_urls"].each do |url|
+        @package.image_urls << url
+      end
+      if @package.save
+        render json: @package, status: :ok
+      else
+        render json: @package.errors, status: :unprocessable_entity
       end
     end
 
