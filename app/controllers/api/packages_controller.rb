@@ -1,6 +1,6 @@
 module Api
   class PackagesController < ApplicationController
-    before_action :set_package, only: [:show, :update, :destroy, :full_package, :update_images]
+    before_action :set_package, only: [:rented_units, :sold_properties, :show, :update, :destroy, :full_package, :update_images]
     before_action :authenticate_from_pdf_app, only: [:full_package, :update_images]
     skip_before_action :authenticate_request, only: [:full_package, :update_images]
 
@@ -37,6 +37,28 @@ module Api
           addresses: @package.user.addresses
         }
       }
+    end
+
+    def rented_units
+      if @current_user.present?
+        @package_rented_units = PackageRentedUnit.where(package_id: @package.id)
+        @rented_units = []
+        @package_rented_units.each do |prn|
+          @rented_units << RentedUnit.find(prn.rented_unit_id)
+        end
+        render json: @rented_units
+      end
+    end
+
+    def sold_properties
+      if @current_user.present?
+        @package_sold_properties = PackageSoldProperty.where(package_id: @package.id)
+        @sold_properties = []
+        @package_sold_properties.each do |psp|
+          @sold_properties << SoldProperty.find(psp.sold_property_id)
+        end
+        render json: @sold_properties
+      end
     end
 
     def create

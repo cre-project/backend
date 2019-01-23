@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       member do
         get 'full_package'
         put 'update_images'
+        get 'rented_units'
+        get 'sold_properties'
       end
       resources :package_sold_properties
       resources :package_rented_units
