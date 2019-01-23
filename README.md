@@ -27,7 +27,9 @@
 ### User
 * Create: POST `api/users` (required: `email`)
 * Update: PUT `api/users/:id`
-* Pabbly redirect: GET `user/customer_portal_url` (required: `customer_id`)
+* Pabbly redirect: GET `api/user/customer_portal_url` (required: `customer_id`)
+* Activate user: POST `api/user/activate` (required: `token`, `password`)
+* Subscription changed: POST `api/user/subscription_changed` (required: `expiry_date`, `product_id`, `customer_id`)
 
 #### Company
 Company is created with the user:
@@ -36,10 +38,13 @@ Company is created with the user:
 ### Package
 * Index: GET `/api/packages` 
 * Show: GET `/api/packages/:id`
-* Full package: GET `/api/packages/full_package/:id`
+* Full package: GET `/api/packages/:id/full_package`
+* Rented units: GET `api/packages/:id/rented_units`
+* Sold properties: GET `api/packages/:id/sold_properties`
 * Create: POST `api/packages`
 * Update: PUT `api/packages/:id`
 * Destroy: DELETE `api/packages/:id`
+* Update images: PUT `api/packages/:id/update_images` (required: `image_urls`)
 
 ### Property
 * Index: GET `/api/properties` 
@@ -47,6 +52,7 @@ Company is created with the user:
 * Create: POST `api/properties` (required: `price`)
 * Update: PUT `api/properties/:id`
 * Destroy: DELETE `api/properties/:id`
+
 
 #### Address
 Address is created with the property:
