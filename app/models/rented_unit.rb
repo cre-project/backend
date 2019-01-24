@@ -14,5 +14,5 @@ class RentedUnit < ApplicationRecord
   validates :bedrooms, inclusion: { in: 0..4 }
   validates :bathrooms, inclusion: { in: [1, 1.5, 2, 2.5, 3] }, allow_nil: true
 
-  validates :year_built, inclusion: { in: 1500..2050 }, allow_nil: true
+  validates :year_built, inclusion: { in: 0..2050 }, allow_nil: true
 end
