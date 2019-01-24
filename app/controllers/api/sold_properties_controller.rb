@@ -47,7 +47,12 @@ module Api
 
     def destroy
       if @current_user.present? && @sold_property.user_id == @current_user.id
+        @package_sold_properties = PackageSoldProperty.where(sold_property_id: @sold_property.id)
+        @package_sold_properties.each do |psp|
+          psp.destroy
+        end
         @sold_property.destroy
+        render json: @sold_property, status: :ok
       else
         render body: nil, status: :forbidden
       end
