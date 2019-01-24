@@ -12,7 +12,7 @@ module Api
 
     def show
       if @current_user.present? && @sold_property.user_id == @current_user.id
-        render json: @sold_property
+        render json: @sold_property.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
       else
         render body: nil, status: :forbidden
       end
@@ -24,7 +24,7 @@ module Api
         @sold_property.address = Address.create(address_params)
 
         if @sold_property.save
-          render json: @sold_property, status: :created
+          render json: @sold_property.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :created
         else
           render json: @sold_property.errors, status: :unprocessable_entity
         end
@@ -36,7 +36,7 @@ module Api
     def update
       if @sold_property.present? && @sold_property.user_id == @current_user.id
         if @sold_property.update(sold_property_params)
-          render json: @sold_property, status: :ok
+          render json: @sold_property.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :ok
         else
           render json: @sold_property.errors, status: :unprocessable_entity
         end
