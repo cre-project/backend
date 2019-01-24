@@ -4,7 +4,7 @@ module Api
 
     def index
       if @current_user.present?
-        render json: RentedUnit.where(user_id: @current_user.id)
+        render json: RentedUnit.where(user_id: @current_user.id).as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :ok
       else
         render body: nil, status: :forbidden
       end
@@ -12,7 +12,7 @@ module Api
 
     def show
       if @current_user.present? && @rented_unit.user_id == @current_user.id
-        render json: @rented_unit
+        render json: @rented_unit.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :ok
       else
         render body: nil, status: :forbidden
       end
@@ -24,7 +24,7 @@ module Api
         @rented_unit.address = Address.create(address_params)
 
         if @rented_unit.save
-          render json: @rented_unit, status: :created
+          render json: @rented_unit.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :created
         else
           render json: @rented_unit.errors, status: :unprocessable_entity
         end
@@ -36,8 +36,7 @@ module Api
     def update
       if @current_user.present? && @rented_unit.user_id == @current_user.id
         if @rented_unit.update(rented_unit_params)
-          render json: @rented_unit, status: :ok
-        else
+          render json: @rented_unit.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :ok        else
           render json: @rented_unit.errors, status: :unprocessable_entity
         end
       else

@@ -46,7 +46,7 @@ module Api
         @package_rented_units.each do |prn|
           @rented_units << RentedUnit.find(prn.rented_unit_id)
         end
-        render json: @rented_units
+        render json: @rented_units.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
       end
     end
 
