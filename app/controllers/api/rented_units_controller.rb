@@ -47,7 +47,12 @@ module Api
 
     def destroy
       if @current_user.present? && @rented_unit.user_id == @current_user.id
+        @package_rented_units = PackageRentedUnit.where(rented_unit_id: @rented_unit.id)
+        @package_rented_units.each do |pru|
+          pru.destroy
+        end
         @rented_unit.destroy
+        render json: @rented_unit, status: ok
       else
         render body: nil, status: :forbidden
       end
