@@ -86,18 +86,18 @@ Address is created with the rented unit:
 `{ rented_unit: { year_built: 2000, bedrooms: 2, bathrooms: 2, current_rent: 1000, address: { street: "Pennsylvania Avenue", city: "Washington", state: "DC", zip: 19999 } } }`
 
 ### Operating Statement
-* Index: GET `/api/operating_statements` 
-* Show: GET `/api/operating_statements/:id`
-* Create: POST `api/operating_statements`
-* Update: PUT `api/operating_statements/:id`
-* Destroy: DELETE `api/operating_statements/:id`
+* Index: GET `/api/packages/:id/operating_statements` 
+* Show: GET `/api/packages/:id/operating_statements/:id`
+* Create: POST `api/packages/:id/operating_statements`
+* Update: PUT `api/packages/:id/operating_statements/:id`
+* Destroy: DELETE `api/packages/:id/operating_statements/:id`
 
 ### Operating Statement Field
-* Index: GET `/api/operating_statements/:id/operating_statement_fields` 
-* Show: GET `/api/operating_statements/:id/operating_statement_fields/:id`
-* Create: POST `api/operating_statements/:id/operating_statement_fields`
-* Update: PUT `api/operating_statements/:id/operating_statement_fields/:id`
-* Destroy: DELETE `api/operating_statements/:id/operating_statement_fields/:id`
+* Index: GET `/api/package/:id/operating_statements/:id/operating_statement_fields` 
+* Show: GET `/api/package/:id/operating_statements/:id/operating_statement_fields/:id`
+* Create: POST `api/package/:id/operating_statements/:id/operating_statement_fields`
+* Update: PUT `api/package/:id/operating_statements/:id/operating_statement_fields/:id`
+* Destroy: DELETE `api/package/:id/operating_statements/:id/operating_statement_fields/:id`
 
 ### Package Sold Property
 * Index: GET `/api/packages/:id/package_sold_properties` 
