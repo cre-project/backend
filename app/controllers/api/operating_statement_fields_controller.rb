@@ -54,9 +54,11 @@ module Api
     def destroy
       @package = @current_user.packages.find_by(id: params[:package_id])
       @operating_statement = @package.operating_statements.find_by(id: params[:operating_statement_id])
+      @operating_statement_field = @operating_statement.operating_statement_fields.find_by(id: params[:id])
 
       if @current_user.present? && @package.user_id == @current_user.id
         @operating_statement_field.destroy
+        render json: @operating_statement_field, status: :ok
       else
         render body: nil, status: :forbidden
       end

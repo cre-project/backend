@@ -1,4 +1,4 @@
 class OperatingStatementField < ApplicationRecord
-  belongs_to :operating_statement, dependent: :destroy
+  belongs_to :operating_statement
   validates :name, presence: true
 end
