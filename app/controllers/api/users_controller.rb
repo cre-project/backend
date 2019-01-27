@@ -48,11 +48,11 @@ module Api
     end
 
     def activate
-      token = params[:token].to_s
+      token = params[:customer_id].to_s
       errmsg = "Activation token not valid or missing"
 
-      if params[:token].blank?
-        return render json: {error: errmsg}
+      if params[:customer_id].blank?
+        return render json: {error: errmsg}, status: :unprocessable_entity
       end
 
       if params[:password].blank?
