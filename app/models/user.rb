@@ -10,8 +10,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :company, allow_destroy: true
 
   validates :email, presence: true
-
   validates :email, uniqueness: true, case_sensitive: false
+  before_save :downcase_email
 
   validates_format_of :phone_number, with: /\d[0-9]{9}/, allow_nil: true
   validates_format_of :fax, with: /\d[0-9]{9}/, allow_nil: true
@@ -36,5 +36,9 @@ class User < ApplicationRecord
 
   def generate_token
     SecureRandom.hex(10)
+  end
+
+  def downcase_email
+    self.email.downcase!
   end
 end
