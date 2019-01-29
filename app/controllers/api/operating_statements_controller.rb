@@ -65,7 +65,7 @@ module Api
       end
 
       def operating_statement_params
-        params.fetch(:operating_statement, {})
+        params.require(:operating_statement).permit(:vacancy, :taxes, :taxes_label, :mgmt_fee, :mgmt_fee_label)
       end
   end
 end
