@@ -51,7 +51,7 @@ module Api
           pru.destroy
         end
         @rented_unit.destroy
-        render json: @rented_unit, status: ok
+        render json: @rented_unit, status: :ok
       else
         render body: nil, status: :forbidden
       end
