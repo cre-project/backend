@@ -63,9 +63,8 @@ module Api
       def set_operating_statement
         @operating_statement = OperatingStatement.find(params[:id])
       end
-
       def operating_statement_params
-        params.require(:operating_statement).permit(:vacancy, :taxes, :taxes_label, :mgmt_fee, :mgmt_fee_label)
+        params.fetch(:operating_statement, {})
       end
   end
 end
