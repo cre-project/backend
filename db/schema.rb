@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_095603) do
+ActiveRecord::Schema.define(version: 2019_01_31_125012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -87,6 +87,16 @@ ActiveRecord::Schema.define(version: 2019_01_29_095603) do
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.string "image_urls", default: [], array: true
+    t.string "cover_image_url"
+    t.string "information_image_url"
+    t.string "table_of_contents_image_url"
+    t.string "property_information_cover_image_url"
+    t.string "property_information_image_url"
+    t.string "property_photos_cover_image_url"
+    t.string "recent_sales_cover_image_url"
+    t.string "rent_comparables_cover_image_url"
+    t.string "pricing_cover_image_url"
+    t.string "closing_cover_image_url"
     t.index ["user_id"], name: "index_packages_on_user_id"
   end
 
