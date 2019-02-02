@@ -109,7 +109,7 @@ module Api
       end
 
       def package_params
-        params.require(:package).permit(:template, :image_urls, :cover_image_url, :information_image_url, :table_of_contents_image_url, :property_information_cover_image_url, :property_information_image_url, :property_photos_cover_image_url, :recent_sales_cover_image_url, :rent_comparables_cover_image_url, :pricing_cover_image_url, :closing_cover_image_url)
+        params.require(:package).permit(:template, :image_urls, :cover_image_url, :information_image_url, :table_of_contents_image_url, :property_information_cover_image_url, :property_information_image_url, :property_photos_cover_image_url, :recent_sales_cover_image_url, :rent_comparables_cover_image_url, :pricing_cover_image_url, :closing_cover_image_url, property_image_1, property_image_2, property_image_3, property_image_4)
       end
 
       def property_units
