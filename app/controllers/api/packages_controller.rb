@@ -1,8 +1,8 @@
 module Api
   class PackagesController < ApplicationController
     before_action :set_package, only: [:rented_units, :sold_properties, :show, :update, :destroy, :full_package, :update_images]
-    before_action :authenticate_from_pdf_app, only: [:full_package, :update_images]
-    skip_before_action :authenticate_request, only: [:full_package, :update_images]
+    before_action :authenticate_from_pdf_app, only: [:full_package, :update_images, :update]
+    skip_before_action :authenticate_request, only: [:full_package, :update_images, :update]
 
     def index
       if @current_user.present?
@@ -77,14 +77,10 @@ module Api
     end
 
     def update
-      if @current_user.present? && @package.user_id == @current_user.id
-        if @package.update(package_params)
-          render json: @package, status: :ok
-        else
-          render json: @package.errors, status: :unprocessable_entity
-        end
+      if @package.update(package_params)
+        render json: @package, status: :ok
       else
-        render body: nil, status: :forbidden
+        render json: @package.errors, status: :unprocessable_entity
       end
     end
 
