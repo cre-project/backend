@@ -36,7 +36,9 @@ module Api
     def update
       if @current_user.present? && @rented_unit.user_id == @current_user.id
         if @rented_unit.update(rented_unit_params)
-          render json: @rented_unit.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :ok        else
+          @rented_unit.address.update(address_params)
+          render json: @rented_unit.as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id]), status: :ok        
+        else
           render json: @rented_unit.errors, status: :unprocessable_entity
         end
       else
