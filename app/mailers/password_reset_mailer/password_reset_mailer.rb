@@ -4,7 +4,7 @@ class PasswordResetMailer < ApplicationMailer
   def reset_password_email
     @user = params[:user]
     @dashboard = ENV["DASHBOARD_URL"]
-    @url  = @dashboard + '/reset/' + @user.reset_password_token
+    @url  = @dashboard + '/password-reset/' + @user.reset_password_token
     mail(to: @user.email, subject: 'Password Reset Offering CRE')
   end
 end
