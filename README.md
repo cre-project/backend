@@ -30,7 +30,7 @@
 * Update: PUT `api/users/:id`
 * Pabbly redirect: GET `api/user/customer_portal_url` (required: `customer_id`)
 * Activate user: POST `api/user/activate` (required: `token`, `password`)
-* Subscription changed: POST `api/user/subscription_changed` (required: `expiry_date`, `product_id`, `customer_id`)
+* Subscription changed: POST `api/user/subscription_changed` (required: `expiry_date`, `id`, `customer_id`)
 
 #### Company
 Company is created with the user:
