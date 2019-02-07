@@ -13,6 +13,7 @@
 * Deployment: `git push heroku master`
 
 ## Environment Variables
+* `DASHBOARD_URL`
 * `SECRET_KEY_BASE`
 * `PABBLY_API_KEY`
 * `PABBLY_SECRET_KEY`
