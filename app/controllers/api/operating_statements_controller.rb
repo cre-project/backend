@@ -64,7 +64,7 @@ module Api
         @operating_statement = OperatingStatement.find(params[:id])
       end
       def operating_statement_create_params
-        params.require(:operating_statement).permit(:package_id)
+        params.permit(:operating_statement).permit(:package_id)
       end
       def operating_statement_params
         params.require(:operating_statement).permit(:vacancy, :taxes, :taxes_label, :mgmt_fee, :mgmt_fee_label)
