@@ -4,7 +4,8 @@ module Api
 
     def index
       if @current_user.present?
-        render json: Property.where(user_id: @current_user.id).as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
+        @properties = Property.where(user_id: @current_user.id).as_json(include: [address: {except: [ :user_id, :property_id, :properties_id, :sold_properties_id, :addressable_type, :addressable_id ]}], except: [:address_id])
+        render json: @properties
       else
         render body: nil, status: :forbidden
       end
