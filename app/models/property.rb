@@ -7,5 +7,5 @@ class Property < ApplicationRecord
 
   validates :price, presence: true
 
-  validates_numericality_of :price, :number_of_stories, :lot_size, greater_than: 0, allow_nil: true
+  validates_numericality_of :price, :number_of_stories, :lot_size, allow_nil: true
 end
