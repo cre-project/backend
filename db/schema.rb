@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_02_214344) do
+ActiveRecord::Schema.define(version: 2019_02_21_224327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_02_02_214344) do
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.string "addressable_type"
-    t.bigint "addressable_id"
+    t.uuid "addressable_id"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
@@ -140,8 +140,6 @@ ActiveRecord::Schema.define(version: 2019_02_02_214344) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
-    t.uuid "address_id"
-    t.index ["address_id"], name: "index_rented_units_on_address_id"
     t.index ["user_id"], name: "index_rented_units_on_user_id"
   end
 
@@ -193,7 +191,6 @@ ActiveRecord::Schema.define(version: 2019_02_02_214344) do
   add_foreign_key "properties", "packages"
   add_foreign_key "properties", "users"
   add_foreign_key "property_units", "properties"
-  add_foreign_key "rented_units", "addresses"
   add_foreign_key "rented_units", "users"
   add_foreign_key "sold_properties", "users"
   add_foreign_key "users", "companies"
