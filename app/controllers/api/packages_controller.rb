@@ -67,7 +67,12 @@ module Api
         @package = @current_user.packages.build(package_params)
 
         if @package.save
-          render json: @package, status: :created
+          if @package.operating_statements.length == 0
+            @operating_statement = @package.operating_statements.create()
+          else
+            @operating_statement = @package.operating_statements.first
+          end
+          render json: { package: @package, operating_statement: @operating_statement }, status: :created
         else
           render json: @package.errors, status: :unprocessable_entity
         end
